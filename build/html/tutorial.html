@@ -1,0 +1,560 @@
+
+<!DOCTYPE html>
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>アプリ開発の手ほどき &#8212; mitama documentation 1.0 ドキュメント</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="概要" href="referrence/index.html" />
+    <link rel="prev" title="クイックスタート" href="quickstart.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>アプリ開発の手ほどき<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>Mitamaは簡単にアプリを配信するサーバーがメインの機能ですが、同時にそのサーバーで稼働するアプリを開発するためのWebアプリケーションフレームワークでもあります。Mitamaに用意された人材管理のための豊富なインターフェースを活かし、手軽に社内システムなどを内製することができます。</p>
+<p>このページで簡単なTodoアプリの開発をしながら、Mitamaでアプリを開発する方法を覚えてみましょう。</p>
+<div class="section" id="id2">
+<h2>準備<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ひとまず、テスト用のプロジェクトディレクトリを作成し、その中でアプリのパッケージフォルダを作成してください。</p>
+<p>今回はmyfirstappというパッケージ名で作成をすすめていきます。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mitama new myfirstproject
+$ <span class="nb">cd</span> myfirstproject
+$ mkdir myfirstapp
+$ <span class="nb">cd</span> myfirstapp
+$ touch __init__.py
+</pre></div>
+</div>
+<p>プロジェクトの設定ファイルを変更し、myfirstappが配信されるようにしましょう。</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;apps&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;mitama.portal&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;myfirstapp&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/todo&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>これで、 <a class="reference external" href="http://localhost:8080/todo">http://localhost:8080/todo</a> でアプリが配信されるようになります。（まだアプリを作り込んでいないので配信されていません。）</p>
+</div>
+<div class="section" id="id3">
+<h2>なにか表示してみる<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>では、次のコードを__init__.pyに書き込んでみましょう。これはおまじないですので、覚えなくていいです。後々紹介する <strong class="command">mitama createapp</strong> コマンドを使えば、勝手に生成してくれます。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mitama.app</span> <span class="kn">import</span> <span class="n">Builder</span>
+<span class="kn">from</span> <span class="nn">.main</span> <span class="kn">import</span> <span class="n">App</span>
+
+<span class="k">class</span> <span class="nc">AppBuilder</span><span class="p">(</span><span class="n">Builder</span><span class="p">):</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">App</span>
+</pre></div>
+</div>
+<p>次に、パッケージ内に <code class="file docutils literal notranslate"><span class="pre">main.py</span></code> を作成しましょう。この中の処理が最初に実行されます。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ touch main.py
+$ ls
+__init__.py  main.py
+</pre></div>
+</div>
+<p>ひとまず、「Hello, world!」と表示するようにしてみましょう。main.pyに次のコードを書いてみてください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mitama.app</span> <span class="kn">import</span> <span class="n">App</span><span class="p">,</span> <span class="n">Router</span><span class="p">,</span> <span class="n">Controller</span>
+<span class="kn">from</span> <span class="nn">mitama.app.method</span> <span class="kn">import</span> <span class="n">view</span>
+<span class="kn">from</span> <span class="nn">mitama.http</span> <span class="kn">import</span> <span class="n">Response</span>
+
+<span class="k">class</span> <span class="nc">HomeController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">)</span>
+
+<span class="n">home</span> <span class="o">=</span> <span class="n">HomeController</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+    <span class="n">instances</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">home</span>
+    <span class="p">]</span>
+    <span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">([</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">home</span><span class="p">)</span>
+    <span class="p">])</span>
+</pre></div>
+</div>
+<p>できたら、サーバーを起動し、ブラウザで表示を確認してみてください。「Hello, world!」が表示されていれば成功です。</p>
+<p>細かく解説しましょう。まず、最初の2行ではアプリに必要なクラスを読み込んでいます。今回はあくまで表示に必要最低限のものだけを読み込みました。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mitama.app</span> <span class="kn">import</span> <span class="n">App</span><span class="p">,</span> <span class="n">Router</span><span class="p">,</span> <span class="n">Controller</span>
+<span class="kn">from</span> <span class="nn">mitama.app.method</span> <span class="kn">import</span> <span class="n">view</span>
+<span class="kn">from</span> <span class="nn">mitama.http</span> <span class="kn">import</span> <span class="n">Response</span>
+</pre></div>
+</div>
+<p>読み込んだControllerを使って早速あたらしいクラスを作っていきます。Controllerはリクエストの処理を司るクラスです。MVCモデルという概念に馴染みのある方には理解しやすいかもしれません。Routerによってルーティングされた場合に実行される様々な挙動をここで定義します。</p>
+<p>今回は単純に「Hello, world!」という文字を含んだレスポンスが得られればいいので、<em>Response(text='Hello, world')</em> を返しています。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HomeController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">)</span>
+
+<span class="n">home</span> <span class="o">=</span> <span class="n">HomeController</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>最後に、Appクラスを定義します。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+    <span class="n">instances</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">home</span>
+    <span class="p">]</span>
+    <span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">([</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">home</span><span class="p">)</span>
+    <span class="p">])</span>
+</pre></div>
+</div>
+<p>Appはこのアプリの中核となるクラスです。この中に登録された情報に基づき、アプリが配信されます。
+Routerはルーティングエンジンです。アクセスされたパスと実行する処理の対応を定義します。この場合、 <code class="file docutils literal notranslate"><span class="pre">/</span></code> にアクセスすると、<code class="samp docutils literal notranslate"><span class="pre">home.handle</span></code> が実行されます。</p>
+</div>
+<div class="section" id="id4">
+<h2>アクセスを制限する<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>社内システムなどでは、外部の人がすべてのページにアクセスすることができるという状態は好ましくありません。必要に応じてアクセス制限をつけてみましょう。</p>
+<p>アクセス制限をかけたいときには、Mitamaに内蔵されているSessionMiddlewareを使うと簡単にできます。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mitama.app</span> <span class="kn">import</span> <span class="n">App</span><span class="p">,</span> <span class="n">Router</span><span class="p">,</span> <span class="n">Controller</span>
+<span class="kn">from</span> <span class="nn">mitama.app.method</span> <span class="kn">import</span> <span class="n">view</span>
+<span class="kn">from</span> <span class="nn">mitama.app.middleware</span> <span class="kn">import</span> <span class="n">SessionMiddleware</span>
+<span class="kn">from</span> <span class="nn">mitama.http</span> <span class="kn">import</span> <span class="n">Response</span>
+
+<span class="o">...</span>
+<span class="n">home</span> <span class="o">=</span> <span class="n">HomeController</span><span class="p">()</span>
+<span class="n">sess_mid</span> <span class="o">=</span> <span class="n">SesssionMiddleware</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+    <span class="n">instances</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">home</span><span class="p">,</span>
+        <span class="n">sess_mid</span>
+    <span class="p">]</span>
+    <span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">([</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">home</span><span class="p">)</span>
+    <span class="p">],</span> <span class="n">middlewares</span> <span class="o">=</span> <span class="p">[</span><span class="n">sess_mid</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>サーバーを再起動し、試しにログインしていない状態でアクセスしてみてください。ログインページへ飛ばされれば成功です。
+飛ばされたら、ログインして戻ってみましょう。そうすると、もとの通り表示されるかと思います。</p>
+<p>このようなMiddlewareは自前で実装することも可能です。</p>
+</div>
+<div class="section" id="todo">
+<h2>Todoを実装してみる<a class="headerlink" href="#todo" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>次に、Todoアプリを実現するための「モデル」を定義してみましょう。モデルとは、アプリ内で扱うデータの塊だと思ってください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mitama.app</span> <span class="kn">import</span> <span class="n">App</span><span class="p">,</span> <span class="n">Router</span><span class="p">,</span> <span class="n">Controller</span>
+<span class="kn">from</span> <span class="nn">mitama.app.method</span> <span class="kn">import</span> <span class="n">view</span>
+<span class="kn">from</span> <span class="nn">mitama.http</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">mitama.db</span> <span class="kn">import</span> <span class="n">BaseDatabase</span>
+<span class="kn">from</span> <span class="nn">mitama.db.types</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">class</span> <span class="nc">Database</span><span class="p">(</span><span class="n">BaseDatabase</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Todo</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">deadline</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">)</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+
+<span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>サーバーを再起動し、パッケージフォルダ内にdb.sqlite3があるか確認してみてください。SQLiteを扱える人は、中身をみてテーブルが作成されていることを確認してみるといいかもしれません。このファイルの中にTodoのデータが溜まっていきます。</p>
+<p>では、このTodoについて、</p>
+<ol class="arabic simple">
+<li><p>作る</p></li>
+<li><p>見る</p></li>
+<li><p>消す</p></li>
+</ol>
+<p>といった操作をするページを作ってみましょう。HTMLのページを作成する場合には、テンプレートを使うと便利です。</p>
+<p>Mitamaでは、Controllerから直接Jinja2を呼び出すことができます。アプリディレクトリ内に <code class="file docutils literal notranslate"><span class="pre">templates/</span></code> フォルダを作成し、HTMLテンプレートを置いてみましょう。</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">&lt;!-- list.html --&gt;</span>
+<span class="x">&lt;!DOCTYPE html&gt;</span>
+<span class="x">&lt;html&gt;</span>
+<span class="x">    &lt;head&gt;</span>
+<span class="x">        &lt;meta charset=&#39;utf-8&#39;&gt;</span>
+<span class="x">    &lt;/head&gt;</span>
+<span class="x">    &lt;body&gt;</span>
+<span class="x">        &lt;h1&gt;Todo一覧&lt;/h1&gt;</span>
+<span class="x">        &lt;a href=&#39;</span><span class="cp">{{</span> <span class="nv">url</span><span class="o">(</span><span class="s1">&#39;/create&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&#39;&gt;Todoを作成&lt;/a&gt;</span>
+<span class="x">        &lt;ul&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">todo</span> <span class="k">in</span> <span class="nv">todos</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">            &lt;li&gt;</span>
+<span class="x">                &lt;h3&gt;</span><span class="cp">{{</span><span class="nv">todo.title</span><span class="cp">}}</span><span class="x">&lt;/h3&gt;</span>
+<span class="x">                &lt;p&gt;</span><span class="cp">{{</span><span class="nv">todo.description</span><span class="cp">}}</span><span class="x">&lt;/p&gt;</span>
+<span class="x">                &lt;a href=&#39;</span><span class="cp">{{</span> <span class="nv">url</span><span class="o">(</span><span class="s1">&#39;/done/&#39;</span><span class="o">+</span><span class="nv">todo.id</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&#39;&gt;完了&lt;/a&gt;</span>
+<span class="x">            &lt;/li&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        &lt;/ul&gt;</span>
+<span class="x">    &lt;/body&gt;</span>
+<span class="x">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">&lt;!-- create.html --&gt;</span>
+<span class="x">&lt;!DOCTYPE html&gt;</span>
+<span class="x">&lt;html&gt;</span>
+<span class="x">    &lt;head&gt;</span>
+<span class="x">        &lt;meta charset=&#39;utf-8&#39;&gt;</span>
+<span class="x">    &lt;/head&gt;</span>
+<span class="x">    &lt;body&gt;</span>
+<span class="x">        &lt;h1&gt;Todoを作成&lt;/h1&gt;</span>
+<span class="x">        &lt;form action=&#39;&#39; method=&#39;POST&#39;&gt;</span>
+<span class="x">            &lt;input type=&#39;text&#39; name=&#39;title&#39; placeholder=&#39;タイトル&#39;&gt;</span>
+<span class="x">            &lt;textarea name=&#39;description&#39; placeholder=&#39;内容&#39;&gt;&lt;/textarea&gt;</span>
+<span class="x">            &lt;input type=&#39;datetime-local&#39; name=&#39;deadline&#39;&gt;</span>
+<span class="x">            &lt;p&gt;</span><span class="cp">{{</span><span class="nv">error</span><span class="cp">}}</span><span class="x">&lt;/p&gt;</span>
+<span class="x">            &lt;button&gt;作成&lt;/button&gt;</span>
+<span class="x">        &lt;/form&gt;</span>
+<span class="x">    &lt;/body&gt;</span>
+<span class="x">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<p>たまにテンプレート内に出てくる <code class="samp docutils literal notranslate"><span class="pre">url(...)</span></code> という関数は、最終的にパスがmitama.json内の設定に合わせて変わってしまうため、それを変換するために実行しています。Controller内などでは、<code class="samp docutils literal notranslate"><span class="pre">Controller.app.convert_url(self,</span> <span class="pre">...)</span></code> を使うと同様の処理ができます。</p>
+<p>HTMLができたら、それを表示する処理、フォームから送信されたデータからTodoを作成する処理、Todoを削除する処理を作成しましょう。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="k">class</span> <span class="nc">HomeController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">todos</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;list.html&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;todos&#39;</span><span class="p">:</span> <span class="n">todos</span>
+        <span class="p">})</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;create.html&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+            <span class="n">post</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="p">()</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">deadline</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;deadline&#39;</span><span class="p">],</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H-%M&#39;</span><span class="p">)</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">err</span>
+                <span class="p">})</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+        <span class="n">todo</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
+<span class="o">...</span>
+<span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">([</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">home</span><span class="p">),</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/create&#39;</span><span class="p">,</span> <span class="n">home</span><span class="o">.</span><span class="n">create</span><span class="p">),</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/done&#39;</span><span class="p">,</span> <span class="n">home</span><span class="o">.</span><span class="n">done</span><span class="p">),</span>
+    <span class="p">],</span> <span class="n">middlewares</span> <span class="o">=</span> <span class="p">[</span><span class="n">sess_mid</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>いきなり大量のコードを書くハメになりましたね…少し整理しましょう。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="n">todos</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;list.html&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s1">&#39;todos&#39;</span><span class="p">:</span> <span class="n">todos</span>
+    <span class="p">})</span>
+</pre></div>
+</div>
+<p><code class="samp docutils literal notranslate"><span class="pre">Todo.query.filter(...).all()</span></code> によって、ログインしているユーザーにより登録されたTodoをすべて取得しています。
+<code class="samp docutils literal notranslate"><span class="pre">request.user</span></code> にはログインしているユーザーのモデルが格納されています。モデルを定義するときにColumn(User)とすればユーザー扱うプロパティを作成できます。
+<code class="samp docutils literal notranslate"><span class="pre">Response.render(...)</span></code> ではテンプレートで生成したHTMLをレスポンスに入れて返してくれます。このとき、</p>
+<ul class="simple">
+<li><p>必ずawaitをつけること</p></li>
+<li><p>requestを引数に与えること</p></li>
+</ul>
+<p>の2つに注意してください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;create.html&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="p">()</span>
+            <span class="n">todo</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
+            <span class="n">todo</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
+            <span class="n">todo</span><span class="o">.</span><span class="n">deadline</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;deadline&#39;</span><span class="p">],</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H-%M&#39;</span><span class="p">)</span>
+            <span class="n">todo</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+            <span class="n">todo</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+                <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">err</span>
+            <span class="p">})</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>createメソッドでは、フォームから送信されたデータの登録を行っています。
+登録作業が正常に行えた場合、トップページにリダイレクトされます。先程も解説したとおり、Controller内では、<code class="samp docutils literal notranslate"><span class="pre">self.app.controller(path)</span></code> によってURLを変換しましょう。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+    <span class="n">todo</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>doneメソッドでは、URLに指定されたIDの、ログインしているユーザーのTodoを抽出し、削除しています。
+その後、すぐにトップページにリダイレクトさせています。</p>
+<p>これで簡単なTodoアプリの完成です。動きましたか？</p>
+</div>
+<div class="section" id="id5">
+<h2>ファイルを整理する<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>とりあえず、現在のフルコードを貼ってみましょう。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mitama.app</span> <span class="kn">import</span> <span class="n">App</span><span class="p">,</span> <span class="n">Router</span><span class="p">,</span> <span class="n">Controller</span>
+<span class="kn">from</span> <span class="nn">mitama.app.method</span> <span class="kn">import</span> <span class="n">view</span>
+<span class="kn">from</span> <span class="nn">mitama.http</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">mitama.db</span> <span class="kn">import</span> <span class="n">BaseDatabase</span>
+<span class="kn">from</span> <span class="nn">mitama.db.types</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">class</span> <span class="nc">Database</span><span class="p">(</span><span class="n">BaseDatabase</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Todo</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">deadline</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">)</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+
+<span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">HomeController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">todos</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;list.html&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;todos&#39;</span><span class="p">:</span> <span class="n">todos</span>
+        <span class="p">})</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;create.html&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+            <span class="n">post</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="p">()</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">deadline</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;deadline&#39;</span><span class="p">],</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H-%M&#39;</span><span class="p">)</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">err</span>
+                <span class="p">})</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+        <span class="n">todo</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
+
+<span class="n">home</span> <span class="o">=</span> <span class="n">HomeController</span><span class="p">()</span>
+<span class="n">sess_mid</span> <span class="o">=</span> <span class="n">SesssionMiddleware</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+    <span class="n">instances</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">home</span><span class="p">,</span>
+        <span class="n">sess_mid</span>
+    <span class="p">]</span>
+    <span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">([</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">home</span><span class="p">),</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/create&#39;</span><span class="p">,</span> <span class="n">home</span><span class="o">.</span><span class="n">create</span><span class="p">),</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/done&#39;</span><span class="p">,</span> <span class="n">home</span><span class="o">.</span><span class="n">done</span><span class="p">),</span>
+    <span class="p">],</span> <span class="n">middlewares</span> <span class="o">=</span> <span class="p">[</span><span class="n">sess_mid</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>長いですよね。これだけ多くのものが一つのファイルに固まっていると混乱するので、ファイルを分割してみましょう。
+開発者的にもまだはっきりと言える状態ではありませんが、一旦以下のファイル構成に落ち着いています。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myfirstapp</span>
+<span class="o">|-</span> <span class="n">templates</span><span class="o">/</span>
+<span class="o">|-</span> <span class="n">static</span><span class="o">/</span>
+<span class="o">|-</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+<span class="o">|-</span> <span class="n">controller</span><span class="o">.</span><span class="n">py</span>
+<span class="o">|-</span> <span class="n">main</span><span class="o">.</span><span class="n">py</span>
+<span class="o">|-</span> <span class="n">middleware</span><span class="o">.</span><span class="n">py</span>
+<span class="o">+-</span> <span class="n">model</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p><code class="file docutils literal notranslate"><span class="pre">controller.py</span></code> には、Controllerクラスの定義を記述します。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mitama.app</span> <span class="kn">import</span> <span class="n">Controller</span>
+<span class="kn">from</span> <span class="nn">mitama.http</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">.model</span> <span class="kn">import</span> <span class="n">Todo</span>
+
+<span class="k">class</span> <span class="nc">HomeController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">todos</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;list.html&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;todos&#39;</span><span class="p">:</span> <span class="n">todos</span>
+        <span class="p">})</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;create.html&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+            <span class="n">post</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="p">()</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">deadline</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;deadline&#39;</span><span class="p">],</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H-%M&#39;</span><span class="p">)</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">err</span>
+                <span class="p">})</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+        <span class="n">todo</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>そして、 <code class="file docutils literal notranslate"><span class="pre">model.py</span></code> にはTodoのようなモデルの定義と、それに必要なデータベースの定義を書きます。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mitama.db</span> <span class="kn">import</span> <span class="n">BaseDatabase</span>
+<span class="kn">from</span> <span class="nn">mitama.db.types</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">class</span> <span class="nc">Database</span><span class="p">(</span><span class="n">BaseDatabase</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Todo</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">deadline</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">)</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+
+<span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="file docutils literal notranslate"><span class="pre">middleware.py</span></code> には、自前のMiddlewareを入れます。また、<code class="file docutils literal notranslate"><span class="pre">templates/</span></code> には先程と同様にテンプレートファイルを、 <code class="file docutils literal notranslate"><span class="pre">static/</span></code> には、<code class="samp docutils literal notranslate"><span class="pre">mitama.app.StaticFileController</span></code> によって配信できる静的ファイルを入れます。</p>
+<p>最終的に、main.pyには下記のコードだけが残ります。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.controller</span> <span class="kn">import</span> <span class="n">HomeController</span>
+<span class="kn">from</span> <span class="nn">mitama.app</span> <span class="kn">import</span> <span class="n">App</span><span class="p">,</span> <span class="n">Router</span>
+<span class="kn">from</span> <span class="nn">mitama.app.method</span> <span class="kn">import</span> <span class="n">view</span>
+<span class="kn">from</span> <span class="nn">mitama.app.middleware</span> <span class="kn">import</span> <span class="n">SessionMiddleware</span>
+
+<span class="n">home</span> <span class="o">=</span> <span class="n">HomeController</span><span class="p">()</span>
+<span class="n">sess_mid</span> <span class="o">=</span> <span class="n">SesssionMiddleware</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+    <span class="n">instances</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">home</span><span class="p">,</span>
+        <span class="n">sess_mid</span>
+    <span class="p">]</span>
+    <span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">([</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">home</span><span class="p">),</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/create&#39;</span><span class="p">,</span> <span class="n">home</span><span class="o">.</span><span class="n">create</span><span class="p">),</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/done&#39;</span><span class="p">,</span> <span class="n">home</span><span class="o">.</span><span class="n">done</span><span class="p">),</span>
+    <span class="p">],</span> <span class="n">middlewares</span> <span class="o">=</span> <span class="p">[</span><span class="n">sess_mid</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>だいぶスッキリしましたね。実は、<strong class="command">mitama createapp &lt;アプリ名&gt;</strong> というコマンドを使うと、このようにすでに分割された空のプロジェクトが生成されます。最初から整理された状態になってより開発にスムーズに取りかかれると思います。</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">mitama documentation</a></h1>
+
+
+
+
+
+
+
+
+<h3>ナビゲーション</h3>
+<p class="caption"><span class="caption-text">目次:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">クイックスタート</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">アプリ開発の手ほどき</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">準備</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">なにか表示してみる</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">アクセスを制限する</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#todo">Todoを実装してみる</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">ファイルを整理する</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="referrence/index.html">概要</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="quickstart.html" title="前の章へ">クイックスタート</a></li>
+      <li>Next: <a href="referrence/index.html" title="次の章へ">概要</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">クイック検索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="検索" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, mitama-org.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/tutorial.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

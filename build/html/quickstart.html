@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>クイックスタート &#8212; mitama documentation 1.0 ドキュメント</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="アプリ開発の手ほどき" href="tutorial.html" />
+    <link rel="prev" title="Mitamaですけどなにか" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>クイックスタート<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>システム担当者のあなた、お疲れ様です。多分忙しいであろうあなたのために、Mitamaを使うために最低限必要な知識をチャチャっとまとめてみました。ちょっとしたUnix系の環境があればすぐに使えるので、試しながら読んでみてくださいね。</p>
+<div class="section" id="id2">
+<h2>インストール<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>MitamaはPythonパッケージとして開発されているので、pipでインストールすることができます。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install mitama
+</pre></div>
+</div>
+<p>下記のコマンドでバージョンが出てきたら、インストール成功です。Mitamaデビューおめでとうございます。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mitama version
+<span class="m">1</span>.0.0
+</pre></div>
+</div>
+<p>無事インストールができたら、「プロジェクト」を作成してみましょう。プロジェクトとは、Mitamaを稼働させる時の単位で、プロジェクトごとにユーザーや組織の情報が生成されたり、アプリをインストールすることができます。アプリ内で使用するデータやリソースファイルもプロジェクトのフォルダ内に生成・設置されます。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mitama new myfirstproject
+$ ls myfirstproject
+mitama.json
+</pre></div>
+</div>
+<p>コマンドを叩くとディレクトリが作成され、中に <code class="file docutils literal notranslate"><span class="pre">mitama.json</span></code> というファイルが置いてあると思います。こいつは設定ファイルです。次の節で覗いてみましょう。</p>
+</div>
+<div class="section" id="id3">
+<h2>サーバーを立ち上げる<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>作成したプロジェクトのディレクトリに入り、サーバーを起動してみましょう。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> myfirstproject
+$ mitama run
+</pre></div>
+</div>
+<p>デフォルトでは、8080番ポートでHTTPサーバーが起動します。<a class="reference external" href="http://localhost">http://localhost</a>:8080にアクセスし、確認してください。</p>
+</div>
+<div class="section" id="id4">
+<h2>設定<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>プロジェクト内のmitama.jsonを開いてください。</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;apps&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;mitama.portal&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>このファイルの中では、どのパッケージを、HTTPサーバーにおけるどのディレクトリで配信するかを設定します。デフォルトでは、Mitamaに標準で搭載されているポータルシステムである <strong class="program">mitama.portal</strong> パッケージが、ルートパスで配信されています。</p>
+<p>試しに、以下の様に変更を加えてみてください。</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;apps&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;mitama.portal&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/portal&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>変更したら、サーバーを一度Ctrl-Cで止め、再度起動してみましょう。するとルートでは404エラーが表示され、ポータルはhttp://localhost:8080/portalで配信されるようになるはずです。</p>
+<p>もし有志の方が作ったアプリや自作のものを動かすときには、portalと同じ様にapps下にアプリの情報を書き加えてください。</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;apps&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;mitama.portal&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;NewPackageName&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/newapppath&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>アプリはpipでインストールすることもできますが、PyPIで公開されていない場合などはアプリのパッケージをまるごとプロジェクトディレクトリに設置することでインストールすることもできます。この場合、パッケージ名はフォルダ名などになるかと思います。詳しくは公開者の指示に従ってください。</p>
+</div>
+<div class="section" id="id5">
+<h2>アプリを作ろう<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Mitamaを使えば、ポータルや有志作成のアプリに加え、手軽に内製システムを実装して動かすことができます。認証システムなどを新たに実装する必要がなく、加えて組織構造に関わる機能が充実しているため、大きく工数を削減できます。加えて、インストール・アンインストールが容易なため、高速でPDCAを回すことができます。</p>
+<p>プロジェクトディレクトリの中で、次のコマンドを実行してみましょう。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mitama createapp newappname
+$ ls newappname
+__init__.py  controller.py  main.py  middleware.py  modal.py  static/  templates/
+</pre></div>
+</div>
+<p>たくさんファイルが生成されました。プロジェクトの <code class="file docutils literal notranslate"><span class="pre">mitama.json</span></code> を変更し、これをサーバーで動かしてみましょう。</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;apps&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;mitama.portal&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;newappname&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/newapp&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="http://localhost:8080/newapp">http://localhost:8080/newapp</a> にWelcomeページが表示されたら成功です。これを書き換えてアプリを作っていきましょう。アプリ開発のチュートリアルは 『 <a class="reference internal" href="tutorial.html"><span class="doc">アプリ開発の手ほどき</span></a> 』をご覧ください。</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">mitama documentation</a></h1>
+
+
+
+
+
+
+
+
+<h3>ナビゲーション</h3>
+<p class="caption"><span class="caption-text">目次:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">クイックスタート</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">インストール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">サーバーを立ち上げる</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">設定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">アプリを作ろう</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">アプリ開発の手ほどき</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referrence/index.html">概要</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="前の章へ">Mitamaですけどなにか</a></li>
+      <li>Next: <a href="tutorial.html" title="次の章へ">アプリ開発の手ほどき</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">クイック検索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="検索" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, mitama-org.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/quickstart.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

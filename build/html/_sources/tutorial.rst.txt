@@ -41,7 +41,7 @@ Mitamaは簡単にアプリを配信するサーバーがメインの機能で�
 なにか表示してみる
 ======================
 
-では、次のコードを__init__.pyに書き込んでみましょう。これはおまじないですので、覚えなくていいです。後々紹介する :command:`mitama createapp` コマンドを使えば、勝手に生成してくれます。
+では、次のコードを__init__.pyに書き込んでみましょう。これはおまじないですので、覚えなくていいです。後々紹介する :command:`mitama mkapp` コマンドを使えば、勝手に生成してくれます。
 
 .. code-block:: python
 
@@ -120,7 +120,7 @@ Routerはルーティングエンジンです。アクセスされたパスと�
 
     from mitama.app import App, Router, Controller
     from mitama.app.method import view
-    from mitama.app.middleware import SessionMiddleware
+    from mitama.app.middlewares import SessionMiddleware
     from mitama.http import Response
 
     ...
@@ -154,7 +154,6 @@ Todoを実装してみる
     db = Database()
 
     class Todo(db.Model):
-        id = Column(Integer, primary_key = True)
         title = Column(String)
         description = Column(String)
         deadline = Column(DateTime)
@@ -191,7 +190,7 @@ Mitamaでは、Controllerから直接Jinja2を呼び出すことができます�
                 <li>
                     <h3>{{todo.title}}</h3>
                     <p>{{todo.description}}</p>
-                    <a href='{{ url('/done/'+todo.id) }}'>完了</a>
+                    <a href='{{ url('/done/'+todo._id) }}'>完了</a>
                 </li>
             {% endfor %}
             </ul>
@@ -251,7 +250,7 @@ HTMLができたら、それを表示する処理、フォームから送信さ�
                 return Response.redirect(self.app.convert_url('/'))
             return Response.render(template)
         def done(self, request):
-            todo = Todo.query.filter(Todo.id == request.params['id']).filter(Todo.user == request.user).one()
+            todo = Todo.query.filter(Todo._id == request.params['id']).filter(Todo.user == request.user).one()
             todo.delete()
             return Response.redirect(self.app.convert_url('/'))
     ...
@@ -305,7 +304,7 @@ createメソッドでは、フォームから送信されたデータの登録�
 .. code-block:: python
 
         def done(self, request):
-            todo = Todo.query.filter(Todo.id == request.params['id']).filter(Todo.user == request.user).one()
+            todo = Todo.query.filter(Todo._id == request.params['id']).filter(Todo.user == request.user).one()
             todo.delete()
             return Response.redirect(self.app.convert_url('/'))
 
@@ -334,7 +333,6 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
     db = Database()
 
     class Todo(db.Model):
-        id = Column(Integer, primary_key = True)
         title = Column(String)
         description = Column(String)
         deadline = Column(DateTime)
@@ -367,7 +365,7 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
                 return Response.redirect(self.app.convert_url('/'))
             return Response.render(template)
         def done(self, request):
-            todo = Todo.query.filter(Todo.id == request.params['id']).filter(Todo.user == request.user).one()
+            todo = Todo.query.filter(Todo._id == request.params['id']).filter(Todo.user == request.user).one()
             todo.delete()
             return Response.redirect(self.app.convert_url('/'))
 
@@ -425,7 +423,7 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
                 return Response.redirect(self.app.convert_url('/'))
             return Response.render(template)
         def done(self, request):
-            todo = Todo.query.filter(Todo.id == request.params['id']).filter(Todo.user == request.user).one()
+            todo = Todo.query.filter(Todo._id == request.params['id']).filter(Todo.user == request.user).one()
             todo.delete()
             return Response.redirect(self.app.convert_url('/'))
 
@@ -442,7 +440,6 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
     db = Database()
 
     class Todo(db.Model):
-        id = Column(Integer, primary_key = True)
         title = Column(String)
         description = Column(String)
         deadline = Column(DateTime)
@@ -468,4 +465,4 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
             view('/done', HomeController, 'done'),
         ], middlewares = [SessionMiddleware])
 
-だいぶスッキリしましたね。実は、:command:`mitama createapp <アプリ名>` というコマンドを使うと、このようにすでに分割された空のプロジェクトが生成されます。最初から整理された状態になってより開発にスムーズに取りかかれると思います。
+だいぶスッキリしましたね。実は、:command:`mitama mkapp <アプリ名>` というコマンドを使うと、このようにすでに分割された空のプロジェクトが生成されます。最初から整理された状態になってより開発にスムーズに取りかかれると思います。

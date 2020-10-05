@@ -95,7 +95,7 @@ Mitamaを使えば、ポータルや有志作成のアプリに加え、手軽�
 
 .. code-block:: bash
 
-    $ mitama createapp newappname
+    $ mitama mkapp newappname
     $ ls newappname
     __init__.py  controller.py  main.py  middleware.py  modal.py  static/  templates/
 

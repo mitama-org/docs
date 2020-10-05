@@ -16,7 +16,7 @@
     <script src="_static/translations.js"></script>
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="検索" href="search.html" />
-    <link rel="next" title="概要" href="referrence/index.html" />
+    <link rel="next" title="コマンド" href="referrence/command.html" />
     <link rel="prev" title="クイックスタート" href="quickstart.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -86,17 +86,12 @@ __init__.py  main.py
 <span class="kn">from</span> <span class="nn">mitama.http</span> <span class="kn">import</span> <span class="n">Response</span>
 
 <span class="k">class</span> <span class="nc">HomeController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">)</span>
 
-<span class="n">home</span> <span class="o">=</span> <span class="n">HomeController</span><span class="p">()</span>
-
 <span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
-    <span class="n">instances</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">home</span>
-    <span class="p">]</span>
     <span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">([</span>
-        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">home</span><span class="p">)</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">HomeController</span><span class="p">)</span>
     <span class="p">])</span>
 </pre></div>
 </div>
@@ -110,24 +105,19 @@ __init__.py  main.py
 <p>読み込んだControllerを使って早速あたらしいクラスを作っていきます。Controllerはリクエストの処理を司るクラスです。MVCモデルという概念に馴染みのある方には理解しやすいかもしれません。Routerによってルーティングされた場合に実行される様々な挙動をここで定義します。</p>
 <p>今回は単純に「Hello, world!」という文字を含んだレスポンスが得られればいいので、<em>Response(text='Hello, world')</em> を返しています。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HomeController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">)</span>
-
-<span class="n">home</span> <span class="o">=</span> <span class="n">HomeController</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>最後に、Appクラスを定義します。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
-    <span class="n">instances</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">home</span>
-    <span class="p">]</span>
     <span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">([</span>
-        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">home</span><span class="p">)</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">HomeController</span><span class="p">)</span>
     <span class="p">])</span>
 </pre></div>
 </div>
 <p>Appはこのアプリの中核となるクラスです。この中に登録された情報に基づき、アプリが配信されます。
-Routerはルーティングエンジンです。アクセスされたパスと実行する処理の対応を定義します。この場合、 <code class="file docutils literal notranslate"><span class="pre">/</span></code> にアクセスすると、<code class="samp docutils literal notranslate"><span class="pre">home.handle</span></code> が実行されます。</p>
+Routerはルーティングエンジンです。アクセスされたパスと実行する処理の対応を定義します。この場合、 <code class="file docutils literal notranslate"><span class="pre">/</span></code> にアクセスすると、<code class="samp docutils literal notranslate"><span class="pre">HomeController.handle</span></code> が実行されます。</p>
 </div>
 <div class="section" id="id4">
 <h2>アクセスを制限する<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h2>
@@ -139,17 +129,11 @@ Routerはルーティングエンジンです。アクセスされたパスと�
 <span class="kn">from</span> <span class="nn">mitama.http</span> <span class="kn">import</span> <span class="n">Response</span>
 
 <span class="o">...</span>
-<span class="n">home</span> <span class="o">=</span> <span class="n">HomeController</span><span class="p">()</span>
-<span class="n">sess_mid</span> <span class="o">=</span> <span class="n">SesssionMiddleware</span><span class="p">()</span>
 
 <span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
-    <span class="n">instances</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">home</span><span class="p">,</span>
-        <span class="n">sess_mid</span>
-    <span class="p">]</span>
     <span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">([</span>
-        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">home</span><span class="p">)</span>
-    <span class="p">],</span> <span class="n">middlewares</span> <span class="o">=</span> <span class="p">[</span><span class="n">sess_mid</span><span class="p">])</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">HomeController</span><span class="p">)</span>
+    <span class="p">],</span> <span class="n">middlewares</span> <span class="o">=</span> <span class="p">[</span><span class="n">SessionMiddleware</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>サーバーを再起動し、試しにログインしていない状態でアクセスしてみてください。ログインページへ飛ばされれば成功です。
@@ -235,16 +219,16 @@ Routerはルーティングエンジンです。アクセスされたパスと�
 <p>HTMLができたら、それを表示する処理、フォームから送信されたデータからTodoを作成する処理、Todoを削除する処理を作成しましょう。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
 <span class="k">class</span> <span class="nc">HomeController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="n">todos</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
         <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;list.html&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="p">{</span>
             <span class="s1">&#39;todos&#39;</span><span class="p">:</span> <span class="n">todos</span>
         <span class="p">})</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;create.html&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
-            <span class="n">post</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">()</span>
+            <span class="n">post</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">()</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="p">()</span>
                 <span class="n">todo</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
@@ -253,12 +237,12 @@ Routerはルーティングエンジンです。アクセスされたパスと�
                 <span class="n">todo</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
                 <span class="n">todo</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-                <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="p">{</span>
                     <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">err</span>
                 <span class="p">})</span>
             <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
         <span class="n">todo</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
@@ -266,33 +250,28 @@ Routerはルーティングエンジンです。アクセスされたパスと�
 <span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
     <span class="o">...</span>
     <span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">([</span>
-        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">home</span><span class="p">),</span>
-        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/create&#39;</span><span class="p">,</span> <span class="n">home</span><span class="o">.</span><span class="n">create</span><span class="p">),</span>
-        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/done&#39;</span><span class="p">,</span> <span class="n">home</span><span class="o">.</span><span class="n">done</span><span class="p">),</span>
-    <span class="p">],</span> <span class="n">middlewares</span> <span class="o">=</span> <span class="p">[</span><span class="n">sess_mid</span><span class="p">])</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">HomeController</span><span class="p">),</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/create&#39;</span><span class="p">,</span> <span class="n">HomeController</span><span class="p">,</span> <span class="s1">&#39;create&#39;</span><span class="p">),</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/done&#39;</span><span class="p">,</span> <span class="n">HomeController</span><span class="p">,</span> <span class="s1">&#39;done&#39;</span><span class="p">),</span>
+    <span class="p">],</span> <span class="n">middlewares</span> <span class="o">=</span> <span class="p">[</span><span class="n">SessionMiddleware</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>いきなり大量のコードを書くハメになりましたね…少し整理しましょう。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
     <span class="n">todos</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
     <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;list.html&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="p">{</span>
         <span class="s1">&#39;todos&#39;</span><span class="p">:</span> <span class="n">todos</span>
     <span class="p">})</span>
 </pre></div>
 </div>
 <p><code class="samp docutils literal notranslate"><span class="pre">Todo.query.filter(...).all()</span></code> によって、ログインしているユーザーにより登録されたTodoをすべて取得しています。
 <code class="samp docutils literal notranslate"><span class="pre">request.user</span></code> にはログインしているユーザーのモデルが格納されています。モデルを定義するときにColumn(User)とすればユーザー扱うプロパティを作成できます。
-<code class="samp docutils literal notranslate"><span class="pre">Response.render(...)</span></code> ではテンプレートで生成したHTMLをレスポンスに入れて返してくれます。このとき、</p>
-<ul class="simple">
-<li><p>必ずawaitをつけること</p></li>
-<li><p>requestを引数に与えること</p></li>
-</ul>
-<p>の2つに注意してください。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+<code class="samp docutils literal notranslate"><span class="pre">Response.render(...)</span></code> ではテンプレートで生成したHTMLをレスポンスに入れて返してくれます。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
     <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;create.html&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
-        <span class="n">post</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">()</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="p">()</span>
             <span class="n">todo</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
@@ -301,16 +280,16 @@ Routerはルーティングエンジンです。アクセスされたパスと�
             <span class="n">todo</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
             <span class="n">todo</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-            <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="p">{</span>
                 <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">err</span>
             <span class="p">})</span>
         <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
-    <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>createメソッドでは、フォームから送信されたデータの登録を行っています。
 登録作業が正常に行えた場合、トップページにリダイレクトされます。先程も解説したとおり、Controller内では、<code class="samp docutils literal notranslate"><span class="pre">self.app.controller(path)</span></code> によってURLを変換しましょう。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
     <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
     <span class="n">todo</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
@@ -344,16 +323,16 @@ Routerはルーティングエンジンです。アクセスされたパスと�
 <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
 
 <span class="k">class</span> <span class="nc">HomeController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="n">todos</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
         <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;list.html&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="p">{</span>
             <span class="s1">&#39;todos&#39;</span><span class="p">:</span> <span class="n">todos</span>
         <span class="p">})</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;create.html&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
-            <span class="n">post</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">()</span>
+            <span class="n">post</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">()</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="p">()</span>
                 <span class="n">todo</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
@@ -362,29 +341,22 @@ Routerはルーティングエンジンです。アクセスされたパスと�
                 <span class="n">todo</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
                 <span class="n">todo</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-                <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="p">{</span>
                     <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">err</span>
                 <span class="p">})</span>
             <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
         <span class="n">todo</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
 
-<span class="n">home</span> <span class="o">=</span> <span class="n">HomeController</span><span class="p">()</span>
-<span class="n">sess_mid</span> <span class="o">=</span> <span class="n">SesssionMiddleware</span><span class="p">()</span>
-
 <span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
-    <span class="n">instances</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">home</span><span class="p">,</span>
-        <span class="n">sess_mid</span>
-    <span class="p">]</span>
     <span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">([</span>
-        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">home</span><span class="p">),</span>
-        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/create&#39;</span><span class="p">,</span> <span class="n">home</span><span class="o">.</span><span class="n">create</span><span class="p">),</span>
-        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/done&#39;</span><span class="p">,</span> <span class="n">home</span><span class="o">.</span><span class="n">done</span><span class="p">),</span>
-    <span class="p">],</span> <span class="n">middlewares</span> <span class="o">=</span> <span class="p">[</span><span class="n">sess_mid</span><span class="p">])</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">HomeController</span><span class="p">),</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/create&#39;</span><span class="p">,</span> <span class="n">HomeController</span><span class="p">,</span> <span class="s1">&#39;create&#39;</span><span class="p">),</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/done&#39;</span><span class="p">,</span> <span class="n">HomeController</span><span class="p">,</span> <span class="s1">&#39;done&#39;</span><span class="p">),</span>
+    <span class="p">],</span> <span class="n">middlewares</span> <span class="o">=</span> <span class="p">[</span><span class="n">SessionMiddleware</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>長いですよね。これだけ多くのものが一つのファイルに固まっていると混乱するので、ファイルを分割してみましょう。
@@ -405,16 +377,16 @@ Routerはルーティングエンジンです。アクセスされたパスと�
 <span class="kn">from</span> <span class="nn">.model</span> <span class="kn">import</span> <span class="n">Todo</span>
 
 <span class="k">class</span> <span class="nc">HomeController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="n">todos</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
         <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;list.html&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="p">{</span>
             <span class="s1">&#39;todos&#39;</span><span class="p">:</span> <span class="n">todos</span>
         <span class="p">})</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;create.html&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
-            <span class="n">post</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">()</span>
+            <span class="n">post</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">post</span><span class="p">()</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="p">()</span>
                 <span class="n">todo</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
@@ -423,12 +395,12 @@ Routerはルーティングエンジンです。アクセスされたパスと�
                 <span class="n">todo</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
                 <span class="n">todo</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-                <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="p">{</span>
                     <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">err</span>
                 <span class="p">})</span>
             <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">done</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Todo</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
         <span class="n">todo</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">convert_url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
@@ -460,19 +432,12 @@ Routerはルーティングエンジンです。アクセスされたパスと�
 <span class="kn">from</span> <span class="nn">mitama.app.method</span> <span class="kn">import</span> <span class="n">view</span>
 <span class="kn">from</span> <span class="nn">mitama.app.middleware</span> <span class="kn">import</span> <span class="n">SessionMiddleware</span>
 
-<span class="n">home</span> <span class="o">=</span> <span class="n">HomeController</span><span class="p">()</span>
-<span class="n">sess_mid</span> <span class="o">=</span> <span class="n">SesssionMiddleware</span><span class="p">()</span>
-
 <span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
-    <span class="n">instances</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">home</span><span class="p">,</span>
-        <span class="n">sess_mid</span>
-    <span class="p">]</span>
     <span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">([</span>
-        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">home</span><span class="p">),</span>
-        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/create&#39;</span><span class="p">,</span> <span class="n">home</span><span class="o">.</span><span class="n">create</span><span class="p">),</span>
-        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/done&#39;</span><span class="p">,</span> <span class="n">home</span><span class="o">.</span><span class="n">done</span><span class="p">),</span>
-    <span class="p">],</span> <span class="n">middlewares</span> <span class="o">=</span> <span class="p">[</span><span class="n">sess_mid</span><span class="p">])</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">HomeController</span><span class="p">),</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/create&#39;</span><span class="p">,</span> <span class="n">HomeController</span><span class="p">,</span> <span class="s1">&#39;create&#39;</span><span class="p">),</span>
+        <span class="n">view</span><span class="p">(</span><span class="s1">&#39;/done&#39;</span><span class="p">,</span> <span class="n">HomeController</span><span class="p">,</span> <span class="s1">&#39;done&#39;</span><span class="p">),</span>
+    <span class="p">],</span> <span class="n">middlewares</span> <span class="o">=</span> <span class="p">[</span><span class="n">SessionMiddleware</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>だいぶスッキリしましたね。実は、<strong class="command">mitama createapp &lt;アプリ名&gt;</strong> というコマンドを使うと、このようにすでに分割された空のプロジェクトが生成されます。最初から整理された状態になってより開発にスムーズに取りかかれると思います。</p>
@@ -507,7 +472,17 @@ Routerはルーティングエンジンです。アクセスされたパスと�
 <li class="toctree-l2"><a class="reference internal" href="#id5">ファイルを整理する</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="referrence/index.html">概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referrence/command.html">コマンド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referrence/index.html">リファレンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referrence/mitama.html">mitama package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referrence/mitama.app.html">mitama.app package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referrence/mitama.command.html">mitama.command package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referrence/mitama.db.html">mitama.db package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referrence/mitama.db.driver.html">mitama.db.driver package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referrence/mitama.http.html">mitama.http package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referrence/mitama.portal.html">mitama.portal package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referrence/mitama.skeleton.html">mitama.skeleton package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referrence/modules.html">mitama</a></li>
 </ul>
 
 <div class="relations">
@@ -515,7 +490,7 @@ Routerはルーティングエンジンです。アクセスされたパスと�
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="quickstart.html" title="前の章へ">クイックスタート</a></li>
-      <li>Next: <a href="referrence/index.html" title="次の章へ">概要</a></li>
+      <li>Next: <a href="referrence/command.html" title="次の章へ">コマンド</a></li>
   </ul></li>
 </ul>
 </div>

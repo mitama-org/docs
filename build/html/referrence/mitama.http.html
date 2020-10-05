@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mitama.http package &#8212; mitama documentation 1.0 ドキュメント</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="mitama.portal package" href="mitama.portal.html" />
+    <link rel="prev" title="mitama.db.driver package" href="mitama.db.driver.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="mitama-http-package">
+<h1>mitama.http package<a class="headerlink" href="#mitama-http-package" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="mitama-http-server-module">
+<h2>mitama.http.server module<a class="headerlink" href="#mitama-http-server-module" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="module-mitama.http.session">
+<span id="mitama-http-session-module"></span><h2>mitama.http.session module<a class="headerlink" href="#module-mitama.http.session" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<dl class="py class">
+<dt id="mitama.http.session.EncryptedCookieStorage">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.http.session.</code><code class="sig-name descname">EncryptedCookieStorage</code><span class="sig-paren">(</span><em class="sig-param">secret_key</em>, <em class="sig-param">*</em>, <em class="sig-param">cookie_name='MITAMA_SESSION'</em>, <em class="sig-param">domain=None</em>, <em class="sig-param">max_age=None</em>, <em class="sig-param">path='/'</em>, <em class="sig-param">secure=None</em>, <em class="sig-param">httponly=True</em>, <em class="sig-param">encoder=&lt;function dumps&gt;</em>, <em class="sig-param">decoder=&lt;function loads&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.http.session.EncryptedCookieStorage" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="mitama.http.session.EncryptedCookieStorage.cookie_name">
+<em class="property">property </em><code class="sig-name descname">cookie_name</code><a class="headerlink" href="#mitama.http.session.EncryptedCookieStorage.cookie_name" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.http.session.EncryptedCookieStorage.cookie_params">
+<em class="property">property </em><code class="sig-name descname">cookie_params</code><a class="headerlink" href="#mitama.http.session.EncryptedCookieStorage.cookie_params" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.http.session.EncryptedCookieStorage.load_cookie">
+<code class="sig-name descname">load_cookie</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.http.session.EncryptedCookieStorage.load_cookie" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.http.session.EncryptedCookieStorage.load_session">
+<code class="sig-name descname">load_session</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.http.session.EncryptedCookieStorage.load_session" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.http.session.EncryptedCookieStorage.max_age">
+<em class="property">property </em><code class="sig-name descname">max_age</code><a class="headerlink" href="#mitama.http.session.EncryptedCookieStorage.max_age" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.http.session.EncryptedCookieStorage.save_cookie">
+<code class="sig-name descname">save_cookie</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">response</span></em>, <em class="sig-param"><span class="n">cookie_data</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">max_age</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.http.session.EncryptedCookieStorage.save_cookie" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.http.session.EncryptedCookieStorage.save_session">
+<code class="sig-name descname">save_session</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">response</span></em>, <em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.http.session.EncryptedCookieStorage.save_session" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mitama.http.session.Session">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.http.session.</code><code class="sig-name descname">Session</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">identity</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">new</span></em>, <em class="sig-param"><span class="n">max_age</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.http.session.Session" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.MutableMapping</span></code></p>
+<dl class="py method">
+<dt id="mitama.http.session.Session.changed">
+<code class="sig-name descname">changed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mitama.http.session.Session.changed" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.http.session.Session.created">
+<em class="property">property </em><code class="sig-name descname">created</code><a class="headerlink" href="#mitama.http.session.Session.created" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.http.session.Session.empty">
+<em class="property">property </em><code class="sig-name descname">empty</code><a class="headerlink" href="#mitama.http.session.Session.empty" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.http.session.Session.identity">
+<em class="property">property </em><code class="sig-name descname">identity</code><a class="headerlink" href="#mitama.http.session.Session.identity" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.http.session.Session.invalidate">
+<code class="sig-name descname">invalidate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mitama.http.session.Session.invalidate" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.http.session.Session.max_age">
+<em class="property">property </em><code class="sig-name descname">max_age</code><a class="headerlink" href="#mitama.http.session.Session.max_age" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.http.session.Session.new">
+<em class="property">property </em><code class="sig-name descname">new</code><a class="headerlink" href="#mitama.http.session.Session.new" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.http.session.Session.set_new_identity">
+<code class="sig-name descname">set_new_identity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">identity</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.http.session.Session.set_new_identity" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mitama.http">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mitama.http" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<dl class="py function">
+<dt id="mitama.http.run_app">
+<code class="sig-prename descclassname">mitama.http.</code><code class="sig-name descname">run_app</code><span class="sig-paren">(</span><em class="sig-param">app</em>, <em class="sig-param">port</em>, <em class="sig-param">request_factory=&lt;bound method Request.parse_stream of &lt;class 'mitama.http.request.Request'&gt;&gt;</em>, <em class="sig-param">ssl=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.http.run_app" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">mitama documentation</a></h1>
+
+
+
+
+
+
+
+
+<h3>ナビゲーション</h3>
+<p class="caption"><span class="caption-text">目次:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">クイックスタート</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">アプリ開発の手ほどき</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command.html">コマンド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">リファレンス</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="mitama.html">mitama package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="mitama.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama.auth">mitama.auth module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama.conf">mitama.conf module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#mitama-extra-module">mitama.extra module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama.hook">mitama.hook module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama.nodes">mitama.nodes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama.permission">mitama.permission module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.app.html">mitama.app package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.command.html">mitama.command package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.db.html">mitama.db package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.db.driver.html">mitama.db.driver package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">mitama.http package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mitama-http-server-module">mitama.http.server module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mitama.http.session">mitama.http.session module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mitama.http">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.portal.html">mitama.portal package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.skeleton.html">mitama.skeleton package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">mitama</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="mitama.html">mitama package</a><ul>
+      <li>Previous: <a href="mitama.db.driver.html" title="前の章へ">mitama.db.driver package</a></li>
+      <li>Next: <a href="mitama.portal.html" title="次の章へ">mitama.portal package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">クイック検索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="検索" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, mitama-org.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/referrence/mitama.http.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

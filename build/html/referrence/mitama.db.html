@@ -1,0 +1,423 @@
+
+<!DOCTYPE html>
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mitama.db package &#8212; mitama documentation 1.0 ドキュメント</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="mitama.db.driver package" href="mitama.db.driver.html" />
+    <link rel="prev" title="mitama.command package" href="mitama.command.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="mitama-db-package">
+<h1>mitama.db package<a class="headerlink" href="#mitama-db-package" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mitama.db.driver.html">mitama.db.driver package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mitama.db.driver.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.db.driver.html#module-mitama.db.driver.sqlite3">mitama.db.driver.sqlite3 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.db.driver.html#module-mitama.db.driver">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="module-mitama.db.model">
+<span id="mitama-db-model-module"></span><h2>mitama.db.model module<a class="headerlink" href="#module-mitama.db.model" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ベースモデル</p>
+<ul class="simple">
+<li><p>アプリサイドから触るときに継承させるベースクラス</p></li>
+<li><p>Djangoのdjango.db.modelsみたいなイメージ</p></li>
+<li><p>データベースはユーザー管理をしているものとは別にしたいので、そのつもりで</p></li>
+<li><p>UserとGroupみたいなカスタム型を使えるようになってると良い</p></li>
+<li><p>Flaskのsqlalchemy拡張が参考に成る</p></li>
+</ul>
+<dl class="py class">
+<dt id="mitama.db.model.Model">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.db.model.</code><code class="sig-name descname">Model</code><a class="headerlink" href="#mitama.db.model.Model" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="mitama.db.model.Model.create">
+<code class="sig-name descname">create</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mitama.db.model.Model.create" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.db.model.Model.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mitama.db.model.Model.delete" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.db.model.Model.list">
+<em class="property">classmethod </em><code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cond</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.db.model.Model.list" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.db.model.Model.retrieve">
+<em class="property">classmethod </em><code class="sig-name descname">retrieve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.db.model.Model.retrieve" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mitama.db.model.Model.type">
+<code class="sig-name descname">type</code><a class="headerlink" href="#mitama.db.model.Model.type" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Model.type.&lt;locals&gt;.Type</span></code> のエイリアス</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mitama.db.model.Model.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mitama.db.model.Model.update" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mitama.db.types">
+<span id="mitama-db-types-module"></span><h2>mitama.db.types module<a class="headerlink" href="#module-mitama.db.types" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>型定義</p>
+<ul class="simple">
+<li><p>ノリで書いたから自分でもよくわからないけど、データベースのカスタム型を定義してみた</p></li>
+<li><p>イメージとしては、データベースの実体には各モデルのidプロパティが入る</p></li>
+<li><p>取り出すときは数字からそれに対応するモデルのインスタンスが還ってくる</p></li>
+<li><p>当然、↓のコードはUser.getなんて関数は用意してないので動かないと思われ</p></li>
+</ul>
+<dl class="py class">
+<dt id="mitama.db.types.Group">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.db.types.</code><code class="sig-name descname">Group</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.db.types.Group" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">sqlalchemy.sql.type_api.TypeDecorator</span></code></p>
+<dl class="py attribute">
+<dt id="mitama.db.types.Group.impl">
+<code class="sig-name descname">impl</code><a class="headerlink" href="#mitama.db.types.Group.impl" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sqlalchemy.sql.sqltypes.Integer</span></code> のエイリアス</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mitama.db.types.Group.process_bind_param">
+<code class="sig-name descname">process_bind_param</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">dialect</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.db.types.Group.process_bind_param" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Receive a bound parameter value to be converted.</p>
+<p>Subclasses override this method to return the
+value that should be passed along to the underlying
+<code class="xref py py-class docutils literal notranslate"><span class="pre">TypeEngine</span></code> object, and from there to the
+DBAPI <code class="docutils literal notranslate"><span class="pre">execute()</span></code> method.</p>
+<p>The operation could be anything desired to perform custom
+behavior, such as transforming or serializing data.
+This could also be used as a hook for validating logic.</p>
+<p>This operation should be designed with the reverse operation
+in mind, which would be the process_result_value method of
+this class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> -- Data to operate upon, of any type expected by
+this method in the subclass.  Can be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>dialect</strong> -- the <code class="xref py py-class docutils literal notranslate"><span class="pre">Dialect</span></code> in use.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mitama.db.types.Group.process_result_value">
+<code class="sig-name descname">process_result_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">dialect</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.db.types.Group.process_result_value" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Receive a result-row column value to be converted.</p>
+<p>Subclasses should implement this method to operate on data
+fetched from the database.</p>
+<p>Subclasses override this method to return the
+value that should be passed back to the application,
+given a value that is already processed by
+the underlying <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeEngine</span></code> object, originally
+from the DBAPI cursor method <code class="docutils literal notranslate"><span class="pre">fetchone()</span></code> or similar.</p>
+<p>The operation could be anything desired to perform custom
+behavior, such as transforming or serializing data.
+This could also be used as a hook for validating logic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> -- Data to operate upon, of any type expected by
+this method in the subclass.  Can be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>dialect</strong> -- the <code class="xref py py-class docutils literal notranslate"><span class="pre">Dialect</span></code> in use.</p></li>
+</ul>
+</dd>
+</dl>
+<p>This operation should be designed to be reversible by
+the &quot;process_bind_param&quot; method of this class.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mitama.db.types.Node">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.db.types.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.db.types.Node" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">sqlalchemy.sql.type_api.TypeDecorator</span></code></p>
+<dl class="py attribute">
+<dt id="mitama.db.types.Node.impl">
+<code class="sig-name descname">impl</code><a class="headerlink" href="#mitama.db.types.Node.impl" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sqlalchemy.sql.sqltypes.Integer</span></code> のエイリアス</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mitama.db.types.Node.process_bind_param">
+<code class="sig-name descname">process_bind_param</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">dialect</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.db.types.Node.process_bind_param" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Receive a bound parameter value to be converted.</p>
+<p>Subclasses override this method to return the
+value that should be passed along to the underlying
+<code class="xref py py-class docutils literal notranslate"><span class="pre">TypeEngine</span></code> object, and from there to the
+DBAPI <code class="docutils literal notranslate"><span class="pre">execute()</span></code> method.</p>
+<p>The operation could be anything desired to perform custom
+behavior, such as transforming or serializing data.
+This could also be used as a hook for validating logic.</p>
+<p>This operation should be designed with the reverse operation
+in mind, which would be the process_result_value method of
+this class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> -- Data to operate upon, of any type expected by
+this method in the subclass.  Can be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>dialect</strong> -- the <code class="xref py py-class docutils literal notranslate"><span class="pre">Dialect</span></code> in use.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mitama.db.types.Node.process_result_value">
+<code class="sig-name descname">process_result_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">dialect</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.db.types.Node.process_result_value" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Receive a result-row column value to be converted.</p>
+<p>Subclasses should implement this method to operate on data
+fetched from the database.</p>
+<p>Subclasses override this method to return the
+value that should be passed back to the application,
+given a value that is already processed by
+the underlying <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeEngine</span></code> object, originally
+from the DBAPI cursor method <code class="docutils literal notranslate"><span class="pre">fetchone()</span></code> or similar.</p>
+<p>The operation could be anything desired to perform custom
+behavior, such as transforming or serializing data.
+This could also be used as a hook for validating logic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> -- Data to operate upon, of any type expected by
+this method in the subclass.  Can be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>dialect</strong> -- the <code class="xref py py-class docutils literal notranslate"><span class="pre">Dialect</span></code> in use.</p></li>
+</ul>
+</dd>
+</dl>
+<p>This operation should be designed to be reversible by
+the &quot;process_bind_param&quot; method of this class.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mitama.db.types.User">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.db.types.</code><code class="sig-name descname">User</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.db.types.User" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">sqlalchemy.sql.type_api.TypeDecorator</span></code></p>
+<dl class="py attribute">
+<dt id="mitama.db.types.User.impl">
+<code class="sig-name descname">impl</code><a class="headerlink" href="#mitama.db.types.User.impl" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sqlalchemy.sql.sqltypes.Integer</span></code> のエイリアス</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mitama.db.types.User.process_bind_param">
+<code class="sig-name descname">process_bind_param</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">dialect</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.db.types.User.process_bind_param" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Receive a bound parameter value to be converted.</p>
+<p>Subclasses override this method to return the
+value that should be passed along to the underlying
+<code class="xref py py-class docutils literal notranslate"><span class="pre">TypeEngine</span></code> object, and from there to the
+DBAPI <code class="docutils literal notranslate"><span class="pre">execute()</span></code> method.</p>
+<p>The operation could be anything desired to perform custom
+behavior, such as transforming or serializing data.
+This could also be used as a hook for validating logic.</p>
+<p>This operation should be designed with the reverse operation
+in mind, which would be the process_result_value method of
+this class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> -- Data to operate upon, of any type expected by
+this method in the subclass.  Can be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>dialect</strong> -- the <code class="xref py py-class docutils literal notranslate"><span class="pre">Dialect</span></code> in use.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mitama.db.types.User.process_result_value">
+<code class="sig-name descname">process_result_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">dialect</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.db.types.User.process_result_value" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Receive a result-row column value to be converted.</p>
+<p>Subclasses should implement this method to operate on data
+fetched from the database.</p>
+<p>Subclasses override this method to return the
+value that should be passed back to the application,
+given a value that is already processed by
+the underlying <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeEngine</span></code> object, originally
+from the DBAPI cursor method <code class="docutils literal notranslate"><span class="pre">fetchone()</span></code> or similar.</p>
+<p>The operation could be anything desired to perform custom
+behavior, such as transforming or serializing data.
+This could also be used as a hook for validating logic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> -- Data to operate upon, of any type expected by
+this method in the subclass.  Can be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>dialect</strong> -- the <code class="xref py py-class docutils literal notranslate"><span class="pre">Dialect</span></code> in use.</p></li>
+</ul>
+</dd>
+</dl>
+<p>This operation should be designed to be reversible by
+the &quot;process_bind_param&quot; method of this class.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mitama.db">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mitama.db" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>データベース</p>
+<p>データベースの接続とか抽象化の処理を書きます
+Databaseはシングルトンの接続のインスタンスを生成するクラスです
+各アプリにはDatabaseを継承したクラスを定義してもらい、そいつのModelプロパティのベースクラスからモデルを作ってもらいます。</p>
+<dl class="py class">
+<dt id="mitama.db.BaseDatabase">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.db.</code><code class="sig-name descname">BaseDatabase</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.db.BaseDatabase" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">mitama.db._Database</span></code></p>
+<p>アプリで利用するデータベースの操作を行うクラス</p>
+<p>アプリからデータベースを使うたい場合、このクラスを継承したクラスをアプリ内に定義します。</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">mitama documentation</a></h1>
+
+
+
+
+
+
+
+
+<h3>ナビゲーション</h3>
+<p class="caption"><span class="caption-text">目次:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">クイックスタート</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">アプリ開発の手ほどき</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command.html">コマンド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">リファレンス</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="mitama.html">mitama package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="mitama.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama.auth">mitama.auth module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama.conf">mitama.conf module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#mitama-extra-module">mitama.extra module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama.hook">mitama.hook module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama.nodes">mitama.nodes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama.permission">mitama.permission module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.app.html">mitama.app package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.command.html">mitama.command package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">mitama.db package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mitama.db.model">mitama.db.model module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mitama.db.types">mitama.db.types module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mitama.db">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.db.driver.html">mitama.db.driver package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.http.html">mitama.http package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.portal.html">mitama.portal package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.skeleton.html">mitama.skeleton package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">mitama</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="mitama.html">mitama package</a><ul>
+      <li>Previous: <a href="mitama.command.html" title="前の章へ">mitama.command package</a></li>
+      <li>Next: <a href="mitama.db.driver.html" title="次の章へ">mitama.db.driver package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">クイック検索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="検索" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, mitama-org.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/referrence/mitama.db.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

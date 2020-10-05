@@ -1,0 +1,613 @@
+
+<!DOCTYPE html>
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mitama.app package &#8212; mitama documentation 1.0 ドキュメント</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="mitama.command package" href="mitama.command.html" />
+    <link rel="prev" title="mitama package" href="mitama.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="mitama-app-package">
+<h1>mitama.app package<a class="headerlink" href="#mitama-app-package" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="module-mitama.app.app">
+<span id="mitama-app-app-module"></span><h2>mitama.app.app module<a class="headerlink" href="#module-mitama.app.app" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<dl class="py class">
+<dt id="mitama.app.app.App">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.app.app.</code><code class="sig-name descname">App</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.app.App" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="mitama.app.app.App.convert_fullurl">
+<code class="sig-name descname">convert_fullurl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">req</span></em>, <em class="sig-param"><span class="n">url</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.app.App.convert_fullurl" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.app.App.convert_url">
+<code class="sig-name descname">convert_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.app.App.convert_url" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mitama.app.app.App.description">
+<code class="sig-name descname">description</code><em class="property"> = ''</em><a class="headerlink" href="#mitama.app.app.App.description" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.app.App.error">
+<code class="sig-name descname">error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">code</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.app.App.error" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.app.App.icon">
+<em class="property">property </em><code class="sig-name descname">icon</code><a class="headerlink" href="#mitama.app.app.App.icon" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.app.App.match">
+<code class="sig-name descname">match</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.app.App.match" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mitama.app.app.App.name">
+<code class="sig-name descname">name</code><em class="property"> = ''</em><a class="headerlink" href="#mitama.app.app.App.name" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.app.App.revert_url">
+<code class="sig-name descname">revert_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.app.App.revert_url" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.app.App.set_middleware">
+<code class="sig-name descname">set_middleware</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">middlewares</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.app.App.set_middleware" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mitama.app.app.App.template_dir">
+<code class="sig-name descname">template_dir</code><em class="property"> = 'templates'</em><a class="headerlink" href="#mitama.app.app.App.template_dir" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.app.App.view">
+<em class="property">property </em><code class="sig-name descname">view</code><a class="headerlink" href="#mitama.app.app.App.view" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="mitama.app.app.dataurl">
+<code class="sig-prename descclassname">mitama.app.app.</code><code class="sig-name descname">dataurl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">blob</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.app.dataurl" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-mitama.app.builder">
+<span id="mitama-app-builder-module"></span><h2>mitama.app.builder module<a class="headerlink" href="#module-mitama.app.builder" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<dl class="py class">
+<dt id="mitama.app.builder.Builder">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.app.builder.</code><code class="sig-name descname">Builder</code><a class="headerlink" href="#mitama.app.builder.Builder" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Appにメタ情報を入力して生成するビルダー</p>
+<p>プロジェクトディレクトリのパスやインストール先、プロジェクト内のアプリ用ディレクトリのパスをAppに設定し、インスタンスを返却します。
+特にこれを弄るケースは想定していませんが、独自の挙動を付けたかったら継承して作っても良いかもしれません。
+アプリのパッケージ直下のAppBuilderが起動されるので、<code class="file docutils literal notranslate"><span class="pre">__init__.py</span></code> に <code class="samp docutils literal notranslate"><span class="pre">class</span> <span class="pre">AppBuilder(Builder)</span></code> を定義してください。</p>
+<dl class="py attribute">
+<dt id="mitama.app.builder.Builder.app">
+<code class="sig-name descname">app</code><em class="property"> = None</em><a class="headerlink" href="#mitama.app.builder.Builder.app" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.builder.Builder.build">
+<code class="sig-name descname">build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.builder.Builder.build" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.builder.Builder.set_name">
+<code class="sig-name descname">set_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.builder.Builder.set_name" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.builder.Builder.set_package">
+<code class="sig-name descname">set_package</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">package</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.builder.Builder.set_package" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.builder.Builder.set_path">
+<code class="sig-name descname">set_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.builder.Builder.set_path" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.builder.Builder.set_project_dir">
+<code class="sig-name descname">set_project_dir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.builder.Builder.set_project_dir" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.builder.Builder.set_project_root_dir">
+<code class="sig-name descname">set_project_root_dir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.builder.Builder.set_project_root_dir" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="mitama-app-meta-module">
+<h2>mitama.app.meta module<a class="headerlink" href="#mitama-app-meta-module" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="module-mitama.app.method">
+<span id="mitama-app-method-module"></span><h2>mitama.app.method module<a class="headerlink" href="#module-mitama.app.method" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<dl class="py function">
+<dt id="mitama.app.method.any">
+<code class="sig-prename descclassname">mitama.app.method.</code><code class="sig-name descname">any</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.method.any" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>メソッドを考慮しないルーティング先を指定</p>
+<p>メソッドに関係なくマッチするルーティング先を作成します。
+:param path: マッチするパス
+:param handler: リクエストハンドラ
+:return: Routeインスタンス</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mitama.app.method.delete">
+<code class="sig-prename descclassname">mitama.app.method.</code><code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.method.delete" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>DELETEのルーティング先を指定</p>
+<p>DELETEメソッドのルーティング先を作成します。
+:param path: マッチするパス
+:param handler: リクエストハンドラ
+:return: Routeインスタンス</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mitama.app.method.get">
+<code class="sig-prename descclassname">mitama.app.method.</code><code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.method.get" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>GETのルーティング先を指定</p>
+<p>GETメソッドのルーティング先を作成します。
+:param path: マッチするパス
+:param handler: リクエストハンドラ
+:return: Routeインスタンス</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mitama.app.method.group">
+<code class="sig-prename descclassname">mitama.app.method.</code><code class="sig-name descname">group</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">router</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.method.group" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>グループルーティング先を指定</p>
+<p>前方一致でルーティング先に中継するルーティング先を作成します。
+:param path: マッチするパス
+:param router: 渡すルーティングエンジン
+:return: GroupRouteインスタンス</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mitama.app.method.head">
+<code class="sig-prename descclassname">mitama.app.method.</code><code class="sig-name descname">head</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.method.head" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>HEADのルーティング先を指定</p>
+<p>HEADメソッドのルーティング先を作成します。
+:param path: マッチするパス
+:param handler: リクエストハンドラ
+:return: Routeインスタンス</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mitama.app.method.option">
+<code class="sig-prename descclassname">mitama.app.method.</code><code class="sig-name descname">option</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.method.option" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>OPTIONのルーティング先を指定</p>
+<p>OPTIONメソッドのルーティング先を作成します。
+:param path: マッチするパス
+:param handler: リクエストハンドラ
+:return: Routeインスタンス</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mitama.app.method.patch">
+<code class="sig-prename descclassname">mitama.app.method.</code><code class="sig-name descname">patch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.method.patch" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>PATCHのルーティング先を指定</p>
+<p>PATCHメソッドのルーティング先を作成します。
+:param path: マッチするパス
+:param handler: リクエストハンドラ
+:return: Routeインスタンス</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mitama.app.method.post">
+<code class="sig-prename descclassname">mitama.app.method.</code><code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.method.post" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>POSTのルーティング先を指定</p>
+<p>POSTメソッドのルーティング先を作成します。
+:param path: マッチするパス
+:param handler: リクエストハンドラ
+:return: Routeインスタンス</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mitama.app.method.put">
+<code class="sig-prename descclassname">mitama.app.method.</code><code class="sig-name descname">put</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.method.put" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>PUTのルーティング先を指定</p>
+<p>PUTメソッドのルーティング先を作成します。
+:param path: マッチするパス
+:param handler: リクエストハンドラ
+:return: Routeインスタンス</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mitama.app.method.view">
+<code class="sig-prename descclassname">mitama.app.method.</code><code class="sig-name descname">view</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.method.view" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>GET, POSTのルーティング先を指定</p>
+<p>ブラウザで見れる一般的なルーティング先を作成します。
+:param path: マッチするパス
+:param handler: リクエストハンドラ
+:return: Routeインスタンス</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-mitama.app.middlewares">
+<span id="mitama-app-middlewares-module"></span><h2>mitama.app.middlewares module<a class="headerlink" href="#module-mitama.app.middlewares" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<dl class="py class">
+<dt id="mitama.app.middlewares.SessionMiddleware">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.app.middlewares.</code><code class="sig-name descname">SessionMiddleware</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.middlewares.SessionMiddleware" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#mitama.app.Middleware" title="mitama.app.Middleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">mitama.app.Middleware</span></code></a></p>
+<p>ログイン判定ミドルウェア</p>
+<p>ログインしていないユーザーがアクセスした場合、/login?redirect_to=&lt;URL&gt;にリダイレクトします。</p>
+<dl class="py method">
+<dt id="mitama.app.middlewares.SessionMiddleware.process">
+<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">handler</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.middlewares.SessionMiddleware.process" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Middlewareのメイン処理</p>
+<p>Middlewareは必ずこのメソッドを実装しなければならない。
+:param request: mitama.http.Requestのインスタンス
+:param handler: requestを引数に受け取る関数（Middleware.process、またはControllerのリクエストハンドラ）</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="mitama-app-noimage-module">
+<h2>mitama.app.noimage module<a class="headerlink" href="#mitama-app-noimage-module" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="module-mitama.app.registry">
+<span id="mitama-app-registry-module"></span><h2>mitama.app.registry module<a class="headerlink" href="#module-mitama.app.registry" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<dl class="py class">
+<dt id="mitama.app.registry.AppRegistry">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.app.registry.</code><code class="sig-name descname">AppRegistry</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.registry.AppRegistry" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">mitama._extra._Singleton</span></code></p>
+<p>稼働しているアプリのレジストリ</p>
+<p>サーバー内で稼働しているアプリのパスやパッケージ名が登録されているレジストリです。
+mitama.jsonを読み込んでアプリを起動するクラスでもあります。
+dictっぽくアプリの取得や配信の停止などが可能です。</p>
+<dl class="py method">
+<dt id="mitama.app.registry.AppRegistry.append">
+<code class="sig-name descname">append</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.registry.AppRegistry.append" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mitama.app.registry.AppRegistry.changed">
+<code class="sig-name descname">changed</code><em class="property"> = False</em><a class="headerlink" href="#mitama.app.registry.AppRegistry.changed" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.registry.AppRegistry.load_config">
+<code class="sig-name descname">load_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.registry.AppRegistry.load_config" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>アプリの一覧をmitama.jsonから読み込み、配信します</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.registry.AppRegistry.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.registry.AppRegistry.reset" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>アプリの一覧をリセットします</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.registry.AppRegistry.router">
+<code class="sig-name descname">router</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.registry.AppRegistry.router" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>アプリの情報に基づいてルーティングエンジンを生成します</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.registry.AppRegistry.start_watch">
+<code class="sig-name descname">start_watch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.registry.AppRegistry.start_watch" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mitama.app.router">
+<span id="mitama-app-router-module"></span><h2>mitama.app.router module<a class="headerlink" href="#module-mitama.app.router" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<dl class="py class">
+<dt id="mitama.app.router.GroupRoute">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.app.router.</code><code class="sig-name descname">GroupRoute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">router</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.router.GroupRoute" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="mitama.app.router.GroupRoute.match">
+<code class="sig-name descname">match</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.router.GroupRoute.match" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mitama.app.router.Path">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.app.router.</code><code class="sig-name descname">Path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.router.Path" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="mitama.app.router.Path.default_filter">
+<code class="sig-name descname">default_filter</code><em class="property"> = 're'</em><a class="headerlink" href="#mitama.app.router.Path.default_filter" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mitama.app.router.Path.filters">
+<code class="sig-name descname">filters</code><em class="property"> = {'float': &lt;function Path.&lt;lambda&gt;&gt;, 'int': &lt;function Path.&lt;lambda&gt;&gt;, 'path': &lt;function Path.&lt;lambda&gt;&gt;, 're': &lt;function Path.&lt;lambda&gt;&gt;}</em><a class="headerlink" href="#mitama.app.router.Path.filters" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.router.Path.match">
+<code class="sig-name descname">match</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.router.Path.match" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mitama.app.router.Path.rule_syntax">
+<code class="sig-name descname">rule_syntax</code><em class="property"> = re.compile('(\\\\*)(?:(?:&lt;([a-zA-Z_][a-zA-Z_0-9]*)?(?::([a-zA-Z_]*)(?::((?:\\\\.|[^\\\\&gt;])+)?)?)?&gt;))')</em><a class="headerlink" href="#mitama.app.router.Path.rule_syntax" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mitama.app.router.Route">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.app.router.</code><code class="sig-name descname">Route</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methods</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">method_name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.router.Route" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="mitama.app.router.Route.match">
+<code class="sig-name descname">match</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.router.Route.match" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mitama.app.router.Router">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.app.router.</code><code class="sig-name descname">Router</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">routes</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">middlewares</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">prefix</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.router.Router" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>ルーティングエンジン</p>
+<p>手軽に実装できて必要最低限なものを目指したので、遅かったりして嫌いだったら無理にこれを使う必要はありません。
+自前のものを適用したい場合は、とりあえず:samp:<cite>hoge.match(Request): -&gt; Response</cite> といったインターフェースを実装したメソッドを作ってください。
+routesの中にRouterインスタンスを指定することもできます。</p>
+<dl class="py method">
+<dt id="mitama.app.router.Router.add_middleware">
+<code class="sig-name descname">add_middleware</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">middleware</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.router.Router.add_middleware" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ミドルウェアを登録します</p>
+<p>Middlewareクラスを与えると、このルーターのインスタンス内でマッチした場合にミドルウェアが順番に起動します。
+:param middleware: Middlewareのインスタンス</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.router.Router.add_middlewares">
+<code class="sig-name descname">add_middlewares</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">middlewares</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.router.Router.add_middlewares" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>複数のミドルウェアを登録します</p>
+<p>Middlewareクラスのリストを与えると、このルーターのインスタンス内でマッチした場合にミドルウェアが順番に起動します。
+:param middlewares: Middlewareのインスタンスのリスト</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.router.Router.add_route">
+<code class="sig-name descname">add_route</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">route</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.router.Router.add_route" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ルーティング先を追加します</p>
+<p>mitama.app.methodの関数で生成したRouteインスタンスを与えてください。
+:param route: Routeインスタンス</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.router.Router.add_routes">
+<code class="sig-name descname">add_routes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">routes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.router.Router.add_routes" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>複数のルーティング先を追加します</p>
+<p>mitama.app.methodの関数で生成したRouteインスタンスを与えてください。
+:param routes: Routeインスタンスのリスト</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.router.Router.clone">
+<code class="sig-name descname">clone</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.router.Router.clone" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.router.Router.match">
+<code class="sig-name descname">match</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.router.Router.match" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="mitama.app.router.RoutingError">
+<em class="property">exception </em><code class="sig-prename descclassname">mitama.app.router.</code><code class="sig-name descname">RoutingError</code><a class="headerlink" href="#mitama.app.router.RoutingError" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-mitama.app.template">
+<span id="mitama-app-template-module"></span><h2>mitama.app.template module<a class="headerlink" href="#module-mitama.app.template" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="module-mitama.app">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mitama.app" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<dl class="py class">
+<dt id="mitama.app.Controller">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.app.</code><code class="sig-name descname">Controller</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.Controller" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>MVCのControllerの基底クラス</p>
+<p>メソッドを記述すると、それをリクエスト処理に利用できる。
+ルーティング時にメソッドを特に指定しない場合はhandleメソッドが実行される。
+:param app: Controllerを起動するAppのインスタンスの参照
+:param view: Controllerが利用するJinja2のEnvironmentインスタンス</p>
+<dl class="py attribute">
+<dt id="mitama.app.Controller.app">
+<code class="sig-name descname">app</code><em class="property"> = None</em><a class="headerlink" href="#mitama.app.Controller.app" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mitama.app.Controller.handle">
+<code class="sig-name descname">handle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span><span class="p">:</span> <span class="n">mitama.http.request.Request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.Controller.handle" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>リクエストハンドラ</p>
+<p>ルーティング時に特にメソッド名を指定しない場合にはこのメソッドが起動する。
+独自にメソッドを定義する場合にも、このメソッドと同じインターフェースを実装しなければならない。
+:param request: mitama.http.Requestのインスタンス
+:return: mitama.http.Responseのインスタンス</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mitama.app.Controller.view">
+<code class="sig-name descname">view</code><em class="property"> = None</em><a class="headerlink" href="#mitama.app.Controller.view" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mitama.app.Middleware">
+<em class="property">class </em><code class="sig-prename descclassname">mitama.app.</code><code class="sig-name descname">Middleware</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.Middleware" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Requestを加工するMiddlewareの抽象クラス</p>
+<p>processメソッドによって受け取ったRequestを変更し、handler（次のMiddleware、またはControllerのメソッド）に受け渡す。
+:param app: Middlewareを起動するAppのインスタンスの参照
+:param view: Middlewareが利用するJinja2のEnvironmentインスタンス</p>
+<dl class="py method">
+<dt id="mitama.app.Middleware.process">
+<em class="property">abstract </em><code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span><span class="p">:</span> <span class="n">mitama.http.request.Request</span></em>, <em class="sig-param"><span class="n">handler</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.Middleware.process" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Middlewareのメイン処理</p>
+<p>Middlewareは必ずこのメソッドを実装しなければならない。
+:param request: mitama.http.Requestのインスタンス
+:param handler: requestを引数に受け取る関数（Middleware.process、またはControllerのリクエストハンドラ）</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="mitama.app.static_files">
+<code class="sig-prename descclassname">mitama.app.</code><code class="sig-name descname">static_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">paths</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mitama.app.static_files" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">mitama documentation</a></h1>
+
+
+
+
+
+
+
+
+<h3>ナビゲーション</h3>
+<p class="caption"><span class="caption-text">目次:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">クイックスタート</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">アプリ開発の手ほどき</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command.html">コマンド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">リファレンス</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="mitama.html">mitama package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="mitama.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama.auth">mitama.auth module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama.conf">mitama.conf module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#mitama-extra-module">mitama.extra module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama.hook">mitama.hook module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama.nodes">mitama.nodes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama.permission">mitama.permission module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitama.html#module-mitama">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">mitama.app package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mitama.app.app">mitama.app.app module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mitama.app.builder">mitama.app.builder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mitama-app-meta-module">mitama.app.meta module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mitama.app.method">mitama.app.method module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mitama.app.middlewares">mitama.app.middlewares module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mitama-app-noimage-module">mitama.app.noimage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mitama.app.registry">mitama.app.registry module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mitama.app.router">mitama.app.router module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mitama.app.template">mitama.app.template module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mitama.app">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.command.html">mitama.command package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.db.html">mitama.db package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.db.driver.html">mitama.db.driver package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.http.html">mitama.http package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.portal.html">mitama.portal package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.skeleton.html">mitama.skeleton package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">mitama</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="mitama.html">mitama package</a><ul>
+      <li>Previous: <a href="mitama.html" title="前の章へ">mitama package</a></li>
+      <li>Next: <a href="mitama.command.html" title="次の章へ">mitama.command package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">クイック検索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="検索" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, mitama-org.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/referrence/mitama.app.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

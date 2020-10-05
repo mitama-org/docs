@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>コマンド &#8212; mitama documentation 1.0 ドキュメント</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="リファレンス" href="index.html" />
+    <link rel="prev" title="アプリ開発の手ほどき" href="../tutorial.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>コマンド<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="mitama-debug-port">
+<h2>mitama debug [port]<a class="headerlink" href="#mitama-debug-port" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>デバッグモードでサーバーを起動します。</p>
+<p>デバッグモードでは、プロジェクトディレクトリ下でファイルの変更があった場合、自動的にアプリのパッケージをリロードします。</p>
+<div class="section" id="id2">
+<h3>例<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mitama debug <span class="m">8080</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mitama-help">
+<h2>mitama help<a class="headerlink" href="#mitama-help" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ヘルプを表示します。</p>
+<div class="section" id="id3">
+<h3>例<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mitama <span class="nb">help</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mitama-mkapp-app-name">
+<h2>mitama mkapp [app_name]<a class="headerlink" href="#mitama-mkapp-app-name" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>アプリパッケージのテンプレートからアプリディレクトリを生成します。</p>
+<div class="section" id="id4">
+<h3>例<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mitama mkapp MyAppName
+$ ls MyAppName
+templates/  static/  __init__.py  controller.py  main.py  model.py
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mitama-init">
+<h2>mitama init<a class="headerlink" href="#mitama-init" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>カレントディレクトリをプロジェクトディレクトリとして初期化します。</p>
+<div class="section" id="id5">
+<h3>例<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mitama init
+$ ls mitama.json
+mitama.json
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mitama-new-project-name">
+<h2>mitama new [project_name]<a class="headerlink" href="#mitama-new-project-name" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>新しいプロジェクトを作成します。</p>
+<div class="section" id="id6">
+<h3>例<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mitama new myproject
+$ ls myproject
+mitama.json
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mitama-run-port">
+<h2>mitama run [port]<a class="headerlink" href="#mitama-run-port" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>サーバーを起動します。</p>
+<div class="section" id="id7">
+<h3>例<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mitama run <span class="m">8080</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mitama-version">
+<h2>mitama version<a class="headerlink" href="#mitama-version" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>バージョンを確認します。</p>
+<div class="section" id="id8">
+<h3>例<a class="headerlink" href="#id8" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mitama version
+<span class="m">2</span>.0.0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">mitama documentation</a></h1>
+
+
+
+
+
+
+
+
+<h3>ナビゲーション</h3>
+<p class="caption"><span class="caption-text">目次:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">クイックスタート</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">アプリ開発の手ほどき</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">コマンド</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mitama-debug-port">mitama debug [port]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mitama-help">mitama help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mitama-mkapp-app-name">mitama mkapp [app_name]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mitama-init">mitama init</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mitama-new-project-name">mitama new [project_name]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mitama-run-port">mitama run [port]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mitama-version">mitama version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">リファレンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.html">mitama package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.app.html">mitama.app package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.command.html">mitama.command package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.db.html">mitama.db package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.db.driver.html">mitama.db.driver package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.http.html">mitama.http package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.portal.html">mitama.portal package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mitama.skeleton.html">mitama.skeleton package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">mitama</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../tutorial.html" title="前の章へ">アプリ開発の手ほどき</a></li>
+      <li>Next: <a href="index.html" title="次の章へ">リファレンス</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">クイック検索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="検索" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, mitama-org.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/referrence/command.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

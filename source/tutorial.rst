@@ -68,17 +68,12 @@ Mitamaは簡単にアプリを配信するサーバーがメインの機能で�
     from mitama.http import Response
 
     class HomeController(Controller):
-        async def handle(self, request):
+        def handle(self, request):
             return Response(text='Hello, world!')
 
-    home = HomeController()
-
     class App(App):
-        instances = [
-            home
-        ]
         router = Router([
-            view('/', home)
+            view('/', HomeController)
         ])
 
 できたら、サーバーを起動し、ブラウザで表示を確認してみてください。「Hello, world!」が表示されていれば成功です。
@@ -98,25 +93,21 @@ Mitamaは簡単にアプリを配信するサーバーがメインの機能で�
 .. code-block:: python
 
     class HomeController(Controller):
-        async def handle(self, request):
+        def handle(self, request):
             return Response(text='Hello, world!')
 
-    home = HomeController()
 
 最後に、Appクラスを定義します。
 
 .. code-block:: python
 
     class App(App):
-        instances = [
-            home
-        ]
         router = Router([
-            view('/', home)
+            view('/', HomeController)
         ])
 
 Appはこのアプリの中核となるクラスです。この中に登録された情報に基づき、アプリが配信されます。
-Routerはルーティングエンジンです。アクセスされたパスと実行する処理の対応を定義します。この場合、 :file:`/` にアクセスすると、:samp:`home.handle` が実行されます。
+Routerはルーティングエンジンです。アクセスされたパスと実行する処理の対応を定義します。この場合、 :file:`/` にアクセスすると、:samp:`HomeController.handle` が実行されます。
 
 アクセスを制限する
 ==========================
@@ -133,17 +124,11 @@ Routerはルーティングエンジンです。アクセスされたパスと�
     from mitama.http import Response
 
     ...
-    home = HomeController()
-    sess_mid = SesssionMiddleware()
 
     class App(App):
-        instances = [
-            home,
-            sess_mid
-        ]
         router = Router([
-            view('/', home)
-        ], middlewares = [sess_mid])
+            view('/', HomeController)
+        ], middlewares = [SessionMiddleware])
 
 サーバーを再起動し、試しにログインしていない状態でアクセスしてみてください。ログインページへ飛ばされれば成功です。
 飛ばされたら、ログインして戻ってみましょう。そうすると、もとの通り表示されるかと思います。
@@ -242,16 +227,16 @@ HTMLができたら、それを表示する処理、フォームから送信さ�
 
     ...
     class HomeController(Controller):
-        async def handle(self, request):
+        def handle(self, request):
             todos = Todo.query.filter(Todo.user == request.user).all()
             template = self.views.get_template('list.html')
-            return await Response.render(template, request, {
+            return Response.render(template, {
                 'todos': todos
             })
-        async def create(self, request):
+        def create(self, request):
             template = self.views.get_template('create.html')
             if request.method == 'POST':
-                post = await request.post()
+                post = request.post()
                 try:
                     todo = Todo()
                     todo.title = post['title']
@@ -260,12 +245,12 @@ HTMLができたら、それを表示する処理、フォームから送信さ�
                     todo.user = request.user
                     todo.create()
                 except Exception as err:
-                    return await Response.render(template, request, {
+                    return Response.render(template, {
                         'error': err
                     })
                 return Response.redirect(self.app.convert_url('/'))
-            return await Response.render(template, request)
-        async def done(self, request):
+            return Response.render(template)
+        def done(self, request):
             todo = Todo.query.filter(Todo.id == request.params['id']).filter(Todo.user == request.user).one()
             todo.delete()
             return Response.redirect(self.app.convert_url('/'))
@@ -273,37 +258,32 @@ HTMLができたら、それを表示する処理、フォームから送信さ�
     class App(App):
         ...
         router = Router([
-            view('/', home),
-            view('/create', home.create),
-            view('/done', home.done),
-        ], middlewares = [sess_mid])
+            view('/', HomeController),
+            view('/create', HomeController, 'create'),
+            view('/done', HomeController, 'done'),
+        ], middlewares = [SessionMiddleware])
 
 いきなり大量のコードを書くハメになりましたね…少し整理しましょう。
 
 .. code-block:: python
    
-        async def handle(self, request):
+        def handle(self, request):
             todos = Todo.query.filter(Todo.user == request.user).all()
             template = self.views.get_template('list.html')
-            return await Response.render(template, request, {
+            return Response.render(template, {
                 'todos': todos
             })
 
 :samp:`Todo.query.filter(...).all()` によって、ログインしているユーザーにより登録されたTodoをすべて取得しています。
 :samp:`request.user` にはログインしているユーザーのモデルが格納されています。モデルを定義するときにColumn(User)とすればユーザー扱うプロパティを作成できます。
-:samp:`Response.render(...)` ではテンプレートで生成したHTMLをレスポンスに入れて返してくれます。このとき、
-
-* 必ずawaitをつけること
-* requestを引数に与えること
-
-の2つに注意してください。
+:samp:`Response.render(...)` ではテンプレートで生成したHTMLをレスポンスに入れて返してくれます。
 
 .. code-block:: python
 
-        async def create(self, request):
+        def create(self, request):
             template = self.views.get_template('create.html')
             if request.method == 'POST':
-                post = await request.post()
+                post = request.post()
                 try:
                     todo = Todo()
                     todo.title = post['title']
@@ -312,11 +292,11 @@ HTMLができたら、それを表示する処理、フォームから送信さ�
                     todo.user = request.user
                     todo.create()
                 except Exception as err:
-                    return await Response.render(template, request, {
+                    return Response.render(template, {
                         'error': err
                     })
                 return Response.redirect(self.app.convert_url('/'))
-            return await Response.render(template, request)
+            return Response.render(template)
 
 createメソッドでは、フォームから送信されたデータの登録を行っています。
 登録作業が正常に行えた場合、トップページにリダイレクトされます。先程も解説したとおり、Controller内では、:samp:`self.app.controller(path)` によってURLを変換しましょう。
@@ -324,7 +304,7 @@ createメソッドでは、フォームから送信されたデータの登録�
 
 .. code-block:: python
 
-        async def done(self, request):
+        def done(self, request):
             todo = Todo.query.filter(Todo.id == request.params['id']).filter(Todo.user == request.user).one()
             todo.delete()
             return Response.redirect(self.app.convert_url('/'))
@@ -363,16 +343,16 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
     db.create_all()
 
     class HomeController(Controller):
-        async def handle(self, request):
+        def handle(self, request):
             todos = Todo.query.filter(Todo.user == request.user).all()
             template = self.views.get_template('list.html')
-            return await Response.render(template, request, {
+            return Response.render(template, {
                 'todos': todos
             })
-        async def create(self, request):
+        def create(self, request):
             template = self.views.get_template('create.html')
             if request.method == 'POST':
-                post = await request.post()
+                post = request.post()
                 try:
                     todo = Todo()
                     todo.title = post['title']
@@ -381,29 +361,22 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
                     todo.user = request.user
                     todo.create()
                 except Exception as err:
-                    return await Response.render(template, request, {
+                    return Response.render(template, {
                         'error': err
                     })
                 return Response.redirect(self.app.convert_url('/'))
-            return await Response.render(template, request)
-        async def done(self, request):
+            return Response.render(template)
+        def done(self, request):
             todo = Todo.query.filter(Todo.id == request.params['id']).filter(Todo.user == request.user).one()
             todo.delete()
             return Response.redirect(self.app.convert_url('/'))
 
-    home = HomeController()
-    sess_mid = SesssionMiddleware()
-
     class App(App):
-        instances = [
-            home,
-            sess_mid
-        ]
         router = Router([
-            view('/', home),
-            view('/create', home.create),
-            view('/done', home.done),
-        ], middlewares = [sess_mid])
+            view('/', HomeController),
+            view('/create', HomeController, 'create'),
+            view('/done', HomeController, 'done'),
+        ], middlewares = [SessionMiddleware])
 
 長いですよね。これだけ多くのものが一つのファイルに固まっていると混乱するので、ファイルを分割してみましょう。
 開発者的にもまだはっきりと言える状態ではありませんが、一旦以下のファイル構成に落ち着いています。
@@ -428,16 +401,16 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
     from .model import Todo
 
     class HomeController(Controller):
-        async def handle(self, request):
+        def handle(self, request):
             todos = Todo.query.filter(Todo.user == request.user).all()
             template = self.views.get_template('list.html')
-            return await Response.render(template, request, {
+            return Response.render(template, {
                 'todos': todos
             })
-        async def create(self, request):
+        def create(self, request):
             template = self.views.get_template('create.html')
             if request.method == 'POST':
-                post = await request.post()
+                post = request.post()
                 try:
                     todo = Todo()
                     todo.title = post['title']
@@ -446,12 +419,12 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
                     todo.user = request.user
                     todo.create()
                 except Exception as err:
-                    return await Response.render(template, request, {
+                    return Response.render(template, {
                         'error': err
                     })
                 return Response.redirect(self.app.convert_url('/'))
-            return await Response.render(template, request)
-        async def done(self, request):
+            return Response.render(template)
+        def done(self, request):
             todo = Todo.query.filter(Todo.id == request.params['id']).filter(Todo.user == request.user).one()
             todo.delete()
             return Response.redirect(self.app.convert_url('/'))
@@ -488,18 +461,11 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
     from mitama.app.method import view
     from mitama.app.middleware import SessionMiddleware
 
-    home = HomeController()
-    sess_mid = SesssionMiddleware()
-
     class App(App):
-        instances = [
-            home,
-            sess_mid
-        ]
         router = Router([
-            view('/', home),
-            view('/create', home.create),
-            view('/done', home.done),
-        ], middlewares = [sess_mid])
+            view('/', HomeController),
+            view('/create', HomeController, 'create'),
+            view('/done', HomeController, 'done'),
+        ], middlewares = [SessionMiddleware])
 
 だいぶスッキリしましたね。実は、:command:`mitama createapp <アプリ名>` というコマンドを使うと、このようにすでに分割された空のプロジェクトが生成されます。最初から整理された状態になってより開発にスムーズに取りかかれると思います。

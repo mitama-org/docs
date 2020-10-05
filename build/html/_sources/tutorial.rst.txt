@@ -260,7 +260,7 @@ HTMLができたら、それを表示する処理、フォームから送信さ�
         router = Router([
             view('/', HomeController),
             view('/create', HomeController, 'create'),
-            view('/done', HomeController, 'done'),
+            view('/done/<id>', HomeController, 'done'),
         ], middlewares = [SessionMiddleware])
 
 いきなり大量のコードを書くハメになりましたね…少し整理しましょう。
@@ -374,7 +374,7 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
         router = Router([
             view('/', HomeController),
             view('/create', HomeController, 'create'),
-            view('/done', HomeController, 'done'),
+            view('/done/<id>', HomeController, 'done'),
         ], middlewares = [SessionMiddleware])
 
 長いですよね。これだけ多くのものが一つのファイルに固まっていると混乱するので、ファイルを分割してみましょう。
@@ -463,7 +463,7 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
         router = Router([
             view('/', HomeController),
             view('/create', HomeController, 'create'),
-            view('/done', HomeController, 'done'),
+            view('/done/<id>', HomeController, 'done'),
         ], middlewares = [SessionMiddleware])
 
 だいぶスッキリしましたね。実は、:command:`mitama mkapp <アプリ名>` というコマンドを使うと、このようにすでに分割された空のプロジェクトが生成されます。最初から整理された状態になってより開発にスムーズに取りかかれると思います。

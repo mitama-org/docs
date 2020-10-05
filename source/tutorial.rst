@@ -144,6 +144,7 @@ Todoを実装してみる
 
     from mitama.app import App, Router, Controller
     from mitama.app.method import view
+    from mitama.app.middlewares import SessionMiddleware
     from mitama.http import Response
     from mitama.db import BaseDatabase
     from mitama.db.types import *

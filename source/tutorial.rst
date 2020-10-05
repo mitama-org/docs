@@ -154,7 +154,6 @@ Todoを実装してみる
     db = Database()
 
     class Todo(db.Model):
-        id = Column(Integer, primary_key = True)
         title = Column(String)
         description = Column(String)
         deadline = Column(DateTime)
@@ -191,7 +190,7 @@ Mitamaでは、Controllerから直接Jinja2を呼び出すことができます�
                 <li>
                     <h3>{{todo.title}}</h3>
                     <p>{{todo.description}}</p>
-                    <a href='{{ url('/done/'+todo.id) }}'>完了</a>
+                    <a href='{{ url('/done/'+todo._id) }}'>完了</a>
                 </li>
             {% endfor %}
             </ul>
@@ -251,7 +250,7 @@ HTMLができたら、それを表示する処理、フォームから送信さ�
                 return Response.redirect(self.app.convert_url('/'))
             return Response.render(template)
         def done(self, request):
-            todo = Todo.query.filter(Todo.id == request.params['id']).filter(Todo.user == request.user).one()
+            todo = Todo.query.filter(Todo._id == request.params['id']).filter(Todo.user == request.user).one()
             todo.delete()
             return Response.redirect(self.app.convert_url('/'))
     ...
@@ -305,7 +304,7 @@ createメソッドでは、フォームから送信されたデータの登録�
 .. code-block:: python
 
         def done(self, request):
-            todo = Todo.query.filter(Todo.id == request.params['id']).filter(Todo.user == request.user).one()
+            todo = Todo.query.filter(Todo._id == request.params['id']).filter(Todo.user == request.user).one()
             todo.delete()
             return Response.redirect(self.app.convert_url('/'))
 
@@ -334,7 +333,6 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
     db = Database()
 
     class Todo(db.Model):
-        id = Column(Integer, primary_key = True)
         title = Column(String)
         description = Column(String)
         deadline = Column(DateTime)
@@ -367,7 +365,7 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
                 return Response.redirect(self.app.convert_url('/'))
             return Response.render(template)
         def done(self, request):
-            todo = Todo.query.filter(Todo.id == request.params['id']).filter(Todo.user == request.user).one()
+            todo = Todo.query.filter(Todo._id == request.params['id']).filter(Todo.user == request.user).one()
             todo.delete()
             return Response.redirect(self.app.convert_url('/'))
 
@@ -425,7 +423,7 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
                 return Response.redirect(self.app.convert_url('/'))
             return Response.render(template)
         def done(self, request):
-            todo = Todo.query.filter(Todo.id == request.params['id']).filter(Todo.user == request.user).one()
+            todo = Todo.query.filter(Todo._id == request.params['id']).filter(Todo.user == request.user).one()
             todo.delete()
             return Response.redirect(self.app.convert_url('/'))
 
@@ -442,7 +440,6 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
     db = Database()
 
     class Todo(db.Model):
-        id = Column(Integer, primary_key = True)
         title = Column(String)
         description = Column(String)
         deadline = Column(DateTime)

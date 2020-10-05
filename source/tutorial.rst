@@ -191,7 +191,7 @@ Mitamaでは、Controllerから直接Jinja2を呼び出すことができます�
                 <li>
                     <h3>{{todo.title}}</h3>
                     <p>{{todo.description}}</p>
-                    <a href='{{ url('/done/'+todo._id|int) }}'>完了</a>
+                    <a href='{{ url('/done/'+todo._id|string) }}'>完了</a>
                 </li>
             {% endfor %}
             </ul>

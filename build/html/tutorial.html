@@ -188,7 +188,7 @@ Routerはルーティングエンジンです。アクセスされたパスと�
 <span class="x">            &lt;li&gt;</span>
 <span class="x">                &lt;h3&gt;</span><span class="cp">{{</span><span class="nv">todo.title</span><span class="cp">}}</span><span class="x">&lt;/h3&gt;</span>
 <span class="x">                &lt;p&gt;</span><span class="cp">{{</span><span class="nv">todo.description</span><span class="cp">}}</span><span class="x">&lt;/p&gt;</span>
-<span class="x">                &lt;a href=&#39;</span><span class="cp">{{</span> <span class="nv">url</span><span class="o">(</span><span class="s1">&#39;/done/&#39;</span><span class="o">+</span><span class="nv">todo._id</span><span class="o">|</span><span class="nf">int</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&#39;&gt;完了&lt;/a&gt;</span>
+<span class="x">                &lt;a href=&#39;</span><span class="cp">{{</span> <span class="nv">url</span><span class="o">(</span><span class="s1">&#39;/done/&#39;</span><span class="o">+</span><span class="nv">todo._id</span><span class="o">|</span><span class="nf">string</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&#39;&gt;完了&lt;/a&gt;</span>
 <span class="x">            &lt;/li&gt;</span>
 <span class="x">        </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span><span class="x"></span>
 <span class="x">        &lt;/ul&gt;</span>

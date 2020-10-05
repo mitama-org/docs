@@ -229,12 +229,12 @@ HTMLができたら、それを表示する処理、フォームから送信さ�
     class HomeController(Controller):
         def handle(self, request):
             todos = Todo.query.filter(Todo.user == request.user).all()
-            template = self.views.get_template('list.html')
+            template = self.view.get_template('list.html')
             return Response.render(template, {
                 'todos': todos
             })
         def create(self, request):
-            template = self.views.get_template('create.html')
+            template = self.view.get_template('create.html')
             if request.method == 'POST':
                 post = request.post()
                 try:
@@ -269,7 +269,7 @@ HTMLができたら、それを表示する処理、フォームから送信さ�
    
         def handle(self, request):
             todos = Todo.query.filter(Todo.user == request.user).all()
-            template = self.views.get_template('list.html')
+            template = self.view.get_template('list.html')
             return Response.render(template, {
                 'todos': todos
             })
@@ -281,7 +281,7 @@ HTMLができたら、それを表示する処理、フォームから送信さ�
 .. code-block:: python
 
         def create(self, request):
-            template = self.views.get_template('create.html')
+            template = self.view.get_template('create.html')
             if request.method == 'POST':
                 post = request.post()
                 try:
@@ -344,12 +344,12 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
     class HomeController(Controller):
         def handle(self, request):
             todos = Todo.query.filter(Todo.user == request.user).all()
-            template = self.views.get_template('list.html')
+            template = self.view.get_template('list.html')
             return Response.render(template, {
                 'todos': todos
             })
         def create(self, request):
-            template = self.views.get_template('create.html')
+            template = self.view.get_template('create.html')
             if request.method == 'POST':
                 post = request.post()
                 try:
@@ -402,12 +402,12 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
     class HomeController(Controller):
         def handle(self, request):
             todos = Todo.query.filter(Todo.user == request.user).all()
-            template = self.views.get_template('list.html')
+            template = self.view.get_template('list.html')
             return Response.render(template, {
                 'todos': todos
             })
         def create(self, request):
-            template = self.views.get_template('create.html')
+            template = self.view.get_template('create.html')
             if request.method == 'POST':
                 post = request.post()
                 try:

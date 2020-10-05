@@ -241,7 +241,7 @@ HTMLができたら、それを表示する処理、フォームから送信さ�
                     todo = Todo()
                     todo.title = post['title']
                     todo.description = post['description']
-                    todo.deadline = datetime.strptime(post['deadline'], '%Y-%m-%dT%H-%M')
+                    todo.deadline = datetime.strptime(post['deadline'], '%Y-%m-%dT%H:%M')
                     todo.user = request.user
                     todo.create()
                 except Exception as err:
@@ -288,7 +288,7 @@ HTMLができたら、それを表示する処理、フォームから送信さ�
                     todo = Todo()
                     todo.title = post['title']
                     todo.description = post['description']
-                    todo.deadline = datetime.strptime(post['deadline'], '%Y-%m-%dT%H-%M')
+                    todo.deadline = datetime.strptime(post['deadline'], '%Y-%m-%dT%H:%M')
                     todo.user = request.user
                     todo.create()
                 except Exception as err:
@@ -356,7 +356,7 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
                     todo = Todo()
                     todo.title = post['title']
                     todo.description = post['description']
-                    todo.deadline = datetime.strptime(post['deadline'], '%Y-%m-%dT%H-%M')
+                    todo.deadline = datetime.strptime(post['deadline'], '%Y-%m-%dT%H:%M')
                     todo.user = request.user
                     todo.create()
                 except Exception as err:
@@ -414,7 +414,7 @@ doneメソッドでは、URLに指定されたIDの、ログインしている�
                     todo = Todo()
                     todo.title = post['title']
                     todo.description = post['description']
-                    todo.deadline = datetime.strptime(post['deadline'], '%Y-%m-%dT%H-%M')
+                    todo.deadline = datetime.strptime(post['deadline'], '%Y-%m-%dT%H:%M')
                     todo.user = request.user
                     todo.create()
                 except Exception as err:
